@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Agenda Deportiva</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#0f172a;
+color:#e5e7eb;
+padding:20px;
+margin:0;
+}
+
+.titulo{
+text-align:center;
+font-size:22px;
+margin-bottom:10px;
+}
+
+.fecha{
+text-align:center;
+color:#94a3b8;
+margin-bottom:20px;
+}
+
+#agenda{
+max-width:750px;
+margin:auto;
+background:#1e293b;
+border-radius:10px;
+overflow:hidden;
+}
+
+.partido{
+padding:14px;
+border-bottom:1px solid #334155;
+cursor:pointer;
+}
+
+.partido:hover{
+background:#334155;
+}
+
+.info{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.hora{
+width:60px;
+font-weight:bold;
+color:#38bdf8;
+}
+
+.bandera{
+width:22px;
+height:22px;
+border-radius:50%;
+}
+
+.links{
+display:none;
+padding:10px 20px;
+background:#020617;
+}
+
+.links a{
+display:block;
+background:#2563eb;
+padding:8px;
+margin:6px 0;
+border-radius:6px;
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="titulo">⚽ Agenda</div>
+<div class="fecha" id="fecha"></div>
+
+<div id="agenda">Cargando eventos...</div>
+
+<script>
+
+const API="https://goolhd.com/agenda.json?v=1.03";
+
+/* fecha automática */
+
+function fechaHoy(){
+
+let hoy=new Date();
+
+let opciones={
+weekday:'long',
+year:'numeric',
+month:'long',
+day:'numeric'
+};
+
+document.getElementById("fecha").innerText=
+hoy.toLocaleDateString('es-ES',opciones);
+
+}
+
+/* convertir hora */
+
+function convertirHora(hora){
+
+if(!hora) return "";
+
+let h=hora.split(":");
+
+let date=new Date();
+
+date.setHours(h[0]);
+date.setMinutes(h[1]);
+
+return date.toLocaleTimeString([],{
+hour:'2-digit',
+minute:'2-digit'
+});
+
+}
+
+/* abrir lista de canales */
+
+function toggle(id){
+
+let el=document.getElementById("links"+id);
+
+el.style.display=
+el.style.display==="block" ? "none":"block";
+
+}
+
+/* limpiar URL del iframe */
+
+function limpiarURL(url){
+
+if(!url) return "";
+
+/* si viene iframe */
+
+if(url.includes("<iframe")){
+let match=url.match(/src="([^"]+)"/);
+if(match) url=match[1];
+}
+
+url=url.trim();
+
+/* quitar rutas embed rotas */
+
+url=url.replace("/embed/eventos.html","");
+
+/* evitar doble base64 */
+
+if(url.includes("?r=")){
+let parts=url.split("?r=");
+if(parts[1]){
+try{
+url=atob(parts[1]);
+}catch(e){}
+}
+}
+
+/* protocolo */
+
+if(url.startsWith("//")){
+url="https:"+url;
+}
+
+/* ruta relativa */
+
+if(url.startsWith("/")){
+url="https://la14hd.com"+url;
+}
+
+/* si no tiene http */
+
+if(!url.startsWith("http")){
+url="https://"+url;
+}
+
+return url;
+
+}
+
+/* cargar agenda */
+
+async function cargarAgenda(){
+
+try{
+
+let res=await fetch(API);
+let data=await res.json();
+
+let html="";
+
+data.data
+.filter(e=>e.attributes.deportes.toLowerCase()=="futbol")
+.sort((a,b)=>a.attributes.diary_hour.localeCompare(b.attributes.diary_hour))
+.forEach((evento,i)=>{
+
+let hora=convertirHora(evento.attributes.diary_hour);
+let desc=evento.attributes.diary_description;
+
+let bandera="https://img.goolhd.com/uploads/sin_imagen_d36205f0e8.png";
+
+if(evento.attributes.country.data){
+
+bandera="https://img.goolhd.com"+
+evento.attributes.country.data.attributes.image.data.attributes.url;
+
+}
+
+html+=`
+
+<div class="partido" onclick="toggle(${i})">
+
+<div class="info">
+<div class="hora">${hora}</div>
+<img class="bandera" src="${bandera}">
+<div>${desc}</div>
+</div>
+
+<div class="links" id="links${i}">
+`;
+
+evento.attributes.embeds.data.forEach(embed=>{
+
+if(embed){
+
+let urlOriginal=limpiarURL(embed.attributes.embed_iframe);
+
+/* enviar al reproductor */
+
+let urlPlayer="https://luanarocio1991-ctrl.github.io/eventos.html?r="+encodeURIComponent(btoa(urlOriginal));
+
+html+=`
+<a href="${urlPlayer}">
+▶ ${embed.attributes.embed_name}
+</a>
+`;
+
+}
+
+});
+
+html+=`</div></div>`;
+
+});
+
+document.getElementById("agenda").innerHTML=html;
+
+}catch(e){
+
+document.getElementById("agenda").innerHTML="Error cargando eventos";
+
+}
+
+}
+
+/* iniciar */
+
+fechaHoy();
+cargarAgenda();
+
+/* actualizar agenda */
+
+setInterval(cargarAgenda,60000);
+
+</script>
+
+</body>
+</html>
+--------------------------------------
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // 🔧 CONFIGURA AQUÍ
+    // Horario original del listado (ejemplo: España = +1)
+    const zonaOrigen = 1;
+
+    // Horario destino
+    // Perú / Colombia = -5
+    const zonaDestino = -5;
+
+    const diferencia = zonaDestino - zonaOrigen;
+
+    document.querySelectorAll(".t").forEach(function(el) {
+
+        const texto = el.textContent.trim();
+        if(!texto.includes(":")) return;
+
+        let [h, m] = texto.split(":").map(Number);
+
+        h = h + diferencia;
+
+        if (h < 0) h += 24;
+        if (h >= 24) h -= 24;
+
+        el.textContent =
+            String(h).padStart(2, "0") + ":" +
+            String(m).padStart(2, "0");
+
+    });
+
+});
+</script>
