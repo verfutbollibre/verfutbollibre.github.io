@@ -281,7 +281,17 @@ cargarAgenda();
 setInterval(cargarAgenda,60000);
 
 </script>
+<div style="color:white;font-size:18px;">
+Visitas: <span id="visits">...</span>
+</div>
 
+<script>
+fetch('https://api.countapi.xyz/hit/verfutbollibre.site/visitas')
+.then(res => res.json())
+.then(res => {
+document.getElementById('visits').innerText = res.value;
+});
+</script>
 </body>
 </html>
 --------------------------------------
