@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cargando evento...</title>
+
+<style>
+
+body{
+margin:0;
+background:#0f0f0f;
+color:white;
+font-family:Arial;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.loader{
+border:5px solid #222;
+border-top:5px solid #1f6feb;
+border-radius:50%;
+width:60px;
+height:60px;
+animation:spin 1s linear infinite;
+margin-top:20px;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+
+</style>
+
+<script>
+
+/* BLOQUEO DE POPUPS */
+
+const originalOpen = window.open;
+
+window.open = function(url,name,features){
+
+let win = null;
+
+try{
+win = originalOpen.call(window,url,name,features);
+}catch(e){}
+
+if(win){
+setTimeout(()=>{
+try{ win.close(); }catch(e){}
+},100);
+}
+
+return null;
+
+};
+
+/* bloquear enlaces que intenten abrir nueva pestaña */
+
+document.addEventListener("click",function(e){
+
+let link = e.target.closest("a");
+
+if(link && link.target === "_blank"){
+e.preventDefault();
+}
+
+},true);
+
+/* bloquear primer clic que activa anuncios */
+
+let primerClick = true;
+
+document.addEventListener("click",function(e){
+
+if(primerClick){
+primerClick=false;
+e.stopPropagation();
+e.preventDefault();
+}
+
+},true);
+
+</script>
+
+</head>
+
+<body>
+
+<h2>🎥 Cargando evento en vivo...</h2>
+<div class="loader"></div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+let embed = params.get("r");
+
+if(embed){
+
+let url = atob(embed).trim();
+
+/* corregir urls */
+
+if(url.startsWith("//")){
+url="https:"+url;
+}
+
+if(url.startsWith("/")){
+url="https://la14hd.com"+url;
+}
+
+if(!url.startsWith("http")){
+url="https://"+url;
+}
+
+/* volver a codificar para enviarlo al puente */
+
+let nuevo = btoa(url);
+
+/* ir primero a la página puente */
+
+setTimeout(()=>{
+location.replace("puente.html?r="+nuevo);
+},1200);
+
+}
+
+</script>
+
+</body>
+</html>
