@@ -205,7 +205,10 @@ try{
 
 let res=await fetch(API);
 let data=await res.json();
-
+console.log(data);
+console.log(data.data[0]);
+console.log(data.data[0].attributes.embeds.data[0]);
+    
 let html="";
 
 data.data
