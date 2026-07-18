@@ -285,17 +285,6 @@ setInterval(cargarAgenda,60000);
 
 </body>
 </html> 
-
-
-
-fetch("https://pltvhd.com/diaries.json")
-.then(r => {
-    console.log("STATUS:", r.status);
-    console.log("OK:", r.ok);
-    return r.text();
-})
-.then(t => console.log(t.substring(0,300)))
-.catch(e => console.error(e));
 --------------------------------------
 <script>
 document.addEventListener("DOMContentLoaded", function () {
