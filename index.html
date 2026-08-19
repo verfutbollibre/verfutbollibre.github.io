@@ -321,4 +321,633 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <script async="async" data-cfasync="false" src="https://pl16550761.profitablecpmratenetwork.com/78e796a34647115581861ea99c7b18cd/invoke.js"></script>
-<div id="container-78e796a34647115581861ea99c7b18cd"></div>
+<div id="container-78e796a34647115581861ea99c7b18cd"></div> 
+
+
+------------------------------------------------------------
+
+
+<div id="agenda-futbol">
+  <div class="cargando">⚽ Cargando agenda...</div>
+</div>
+
+<style>
+#agenda-futbol {
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.cargando {
+  background: #111;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.dia {
+  margin-bottom: 22px;
+}
+
+.fecha {
+  background: #111;
+  color: white;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px 8px 0 0;
+}
+
+.partido {
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.partido-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  cursor: pointer;
+}
+
+.partido-cabecera:hover {
+  background: #f5f5f5;
+}
+
+.hora {
+  width: 65px;
+  min-width: 65px;
+  text-align: center;
+  color: #008000;
+  font-weight: bold;
+}
+
+.info {
+  flex: 1;
+}
+
+.competencia {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.equipos {
+  font-size: 16px;
+  font-weight: bold;
+  color: #222;
+}
+
+.flecha {
+  font-size: 18px;
+  color: #777;
+}
+
+.opciones {
+  display: none;
+  background: #f5f5f5;
+  padding: 10px 15px 15px 92px;
+}
+
+.opciones.abierto {
+  display: block;
+}
+
+.opcion {
+  display: block;
+  background: white;
+  color: #222 !important;
+  text-decoration: none !important;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  font-weight: bold;
+  transition: .2s;
+}
+
+.opcion:hover {
+  background: #008000;
+  color: white !important;
+}
+
+.sin-opciones {
+  color: #888;
+  font-size: 13px;
+  padding: 5px 0;
+}
+
+@media(max-width:600px) {
+
+  .partido-cabecera {
+    padding: 11px 8px;
+  }
+
+  .hora {
+    width: 50px;
+    min-width: 50px;
+    font-size: 13px;
+  }
+
+  .equipos {
+    font-size: 14px;
+  }
+
+  .opciones {
+    padding-left: 58px;
+    padding-right: 8px;
+  }
+
+}
+</style>
+
+<script>
+(function() {
+
+  const API =
+    "https://agenda-gotplay.pollitolalo3334.workers.dev/";
+
+  const contenedor =
+    document.getElementById("agenda-futbol");
+
+
+  function escapar(texto) {
+
+    if (
+      texto === null ||
+      texto === undefined
+    ) {
+      return "";
+    }
+
+    return String(texto)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function fechaBonita(fecha) {
+
+    if (!fecha) return "";
+
+    const p =
+      fecha.split("-");
+
+    if (p.length !== 3) {
+      return fecha;
+    }
+
+    const d =
+      new Date(
+        Number(p[0]),
+        Number(p[1]) - 1,
+        Number(p[2])
+      );
+
+    return d.toLocaleDateString(
+      "es-PE",
+      {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+      }
+    );
+
+  }
+
+
+  function horaBonita(hora) {
+
+    if (!hora) return "";
+
+    return hora.substring(0, 5);
+
+  }
+
+
+  function abrirOpciones(id) {
+
+    const elemento =
+      document.getElementById(
+        "opciones-" + id
+      );
+
+    const flecha =
+      document.getElementById(
+        "flecha-" + id
+      );
+
+    if (!elemento) return;
+
+
+    elemento.classList.toggle(
+      "abierto"
+    );
+
+
+    if (
+      elemento.classList.contains(
+        "abierto"
+      )
+    ) {
+
+      flecha.innerHTML = "▲";
+
+    } else {
+
+      flecha.innerHTML = "▼";
+
+    }
+
+  }
+
+
+  /*
+   * CARGAR JSON
+   */
+
+  fetch(
+    API + "?t=" + Date.now(),
+    {
+      cache: "no-store"
+    }
+  )
+
+  .then(function(respuesta) {
+
+    if (!respuesta.ok) {
+
+      throw new Error(
+        "HTTP " +
+        respuesta.status
+      );
+
+    }
+
+    return respuesta.json();
+
+  })
+
+  .then(function(json) {
+
+    console.log(
+      "AGENDA:",
+      json
+    );
+
+
+    const partidos =
+      json.data;
+
+
+    if (
+      !Array.isArray(partidos) ||
+      partidos.length === 0
+    ) {
+
+      contenedor.innerHTML =
+        '<div class="sin-opciones">' +
+        'No hay eventos disponibles.' +
+        '</div>';
+
+      return;
+
+    }
+
+
+    let html = "";
+
+    let fechaAnterior = "";
+
+    let contador = 0;
+
+
+    partidos.forEach(
+      function(partido) {
+
+        const a =
+          partido.attributes || {};
+
+
+        const id =
+          partido.id ||
+          contador++;
+
+
+        const fecha =
+          a.date_diary || "";
+
+
+        const hora =
+          a.diary_hour || "";
+
+
+        const descripcion =
+          a.diary_description || "";
+
+
+        /*
+         * SEPARAR COMPETENCIA
+         * Y EQUIPOS
+         */
+
+        let competencia = "";
+
+        let equipos = "";
+
+
+        if (
+          descripcion.indexOf(
+            "\n"
+          ) !== -1
+        ) {
+
+          const partes =
+            descripcion.split("\n");
+
+
+          competencia =
+            partes[0].trim();
+
+
+          equipos =
+            partes
+              .slice(1)
+              .join(" ")
+              .trim();
+
+        } else {
+
+          equipos =
+            descripcion.trim();
+
+        }
+
+
+        /*
+         * NUEVA FECHA
+         */
+
+        if (
+          fecha !== fechaAnterior
+        ) {
+
+          if (
+            fechaAnterior !== ""
+          ) {
+
+            html +=
+              "</div>";
+
+          }
+
+
+          html +=
+            '<div class="dia">';
+
+
+          html +=
+            '<div class="fecha">' +
+            '📅 ' +
+            escapar(
+              fechaBonita(fecha)
+            ) +
+            '</div>';
+
+
+          fechaAnterior =
+            fecha;
+
+        }
+
+
+        /*
+         * PARTIDO
+         */
+
+        html +=
+          '<div class="partido">';
+
+
+        /*
+         * CABECERA CLICKEABLE
+         */
+
+        html +=
+          '<div class="partido-cabecera" ' +
+          'onclick="abrirOpciones(' +
+          id +
+          ')">';
+
+
+        html +=
+          '<div class="hora">' +
+          escapar(
+            horaBonita(hora)
+          ) +
+          '</div>';
+
+
+        html +=
+          '<div class="info">';
+
+
+        if (competencia) {
+
+          html +=
+            '<div class="competencia">' +
+            escapar(
+              competencia
+            ) +
+            '</div>';
+
+        }
+
+
+        html +=
+          '<div class="equipos">' +
+          escapar(
+            equipos
+          ) +
+          '</div>';
+
+
+        html +=
+          '</div>';
+
+
+        html +=
+          '<div class="flecha" ' +
+          'id="flecha-' +
+          id +
+          '">' +
+          '▼' +
+          '</div>';
+
+
+        html +=
+          '</div>';
+
+
+        /*
+         * OPCIONES
+         */
+
+        html +=
+          '<div class="opciones" ' +
+          'id="opciones-' +
+          id +
+          '">';
+
+
+        let embeds = [];
+
+
+        if (
+          a.embeds &&
+          Array.isArray(
+            a.embeds.data
+          )
+        ) {
+
+          embeds =
+            a.embeds.data;
+
+        }
+
+
+        if (
+          embeds.length === 0
+        ) {
+
+          html +=
+            '<div class="sin-opciones">' +
+            'No hay opciones disponibles.' +
+            '</div>';
+
+        } else {
+
+
+          embeds.forEach(
+            function(embed) {
+
+              const ea =
+                embed.attributes ||
+                {};
+
+
+              const nombre =
+                ea.embed_name ||
+                "Ver transmisión";
+
+
+              let iframe =
+                ea.embed_iframe ||
+                "";
+
+
+              /*
+               * Si la URL viene relativa
+               */
+
+              if (
+                iframe &&
+                iframe.charAt(0) === "/"
+              ) {
+
+                iframe =
+                  "https://futbollibretv.net.pe" +
+                  iframe;
+
+              }
+
+
+              /*
+               * Si es una URL válida,
+               * crear botón
+               */
+
+              if (iframe) {
+
+                html +=
+                  '<a class="opcion" ' +
+                  'href="' +
+                  escapar(iframe) +
+                  '" ' +
+                  'target="_blank" ' +
+                  'rel="noopener noreferrer">' +
+                  '📺 ' +
+                  escapar(nombre) +
+                  '</a>';
+
+              } else {
+
+                html +=
+                  '<div class="sin-opciones">' +
+                  escapar(nombre) +
+                  '</div>';
+
+              }
+
+            }
+          );
+
+        }
+
+
+        html +=
+          '</div>';
+
+
+        html +=
+          '</div>';
+
+      }
+    );
+
+
+    if (
+      fechaAnterior !== ""
+    ) {
+
+      html +=
+        "</div>";
+
+    }
+
+
+    contenedor.innerHTML =
+      html;
+
+  })
+
+
+  .catch(function(error) {
+
+    console.error(
+      "ERROR:",
+      error
+    );
+
+
+    contenedor.innerHTML =
+      '<div class="sin-opciones">' +
+      '❌ Error cargando la agenda: ' +
+      escapar(
+        error.message
+      ) +
+      '</div>';
+
+  });
+
+
+})();
+</script>
