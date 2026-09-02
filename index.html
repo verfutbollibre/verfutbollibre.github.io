@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,23 +16,46 @@
    ESTILO GENERAL
 ========================= */
 
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+}
+
 body{
     font-family:Arial, sans-serif;
     background:#0f172a;
     color:#e5e7eb;
-    padding:20px;
-    margin:0;
 
-    /* Espacio para que el banner fijo
-       no tape el último evento */
-    padding-bottom:90px;
+    /* Espacio lateral */
+    padding-left:20px;
+    padding-right:20px;
+
+    /* IMPORTANTE:
+       espacio para el banner fijo */
+    padding-bottom:70px;
+
+    box-sizing:border-box;
 }
+
+
+/* =========================
+   TITULO
+========================= */
 
 .titulo{
     text-align:center;
     font-size:22px;
+    margin-top:20px;
     margin-bottom:10px;
 }
+
+
+/* =========================
+   FECHA
+========================= */
 
 .fecha{
     text-align:center;
@@ -47,100 +69,187 @@ body{
 ========================= */
 
 #agenda{
+    width:100%;
     max-width:750px;
-    margin:auto;
+
+    margin:0 auto;
+
     background:#1e293b;
+
     border-radius:10px;
+
     overflow:hidden;
 }
 
+
+/* =========================
+   PARTIDO
+========================= */
+
 .partido{
     padding:14px;
+
     border-bottom:1px solid #334155;
+
     cursor:pointer;
+
+    box-sizing:border-box;
 }
 
 .partido:hover{
     background:#334155;
 }
 
+
+/* =========================
+   INFORMACION
+========================= */
+
 .info{
     display:flex;
+
     align-items:center;
+
     gap:10px;
 }
 
+
+/* =========================
+   HORA
+========================= */
+
 .hora{
     width:60px;
+
+    flex-shrink:0;
+
     font-weight:bold;
+
     color:#38bdf8;
 }
+
+
+/* =========================
+   BANDERA
+========================= */
 
 .bandera{
     width:22px;
     height:22px;
+
+    flex-shrink:0;
+
     border-radius:50%;
+
     object-fit:cover;
 }
 
+
+/* =========================
+   ENLACES
+========================= */
+
 .links{
     display:none;
+
     padding:10px 20px;
+
     background:#020617;
 }
 
+
+/* =========================
+   BOTONES DE CANALES
+========================= */
+
 .links a{
     display:block;
+
     background:#2563eb;
+
     padding:8px;
+
     margin:6px 0;
+
     border-radius:6px;
+
     color:white;
+
     text-decoration:none;
+
     font-size:14px;
 }
 
 
 /* =========================
-   BANNER FIJO
+   BANNER FIJO INFERIOR
 ========================= */
 
 .banner-fijo{
 
     position:fixed;
 
-    left:50%;
-
+    /* Pegado abajo */
     bottom:0;
+
+    /* Centrado horizontal */
+    left:50%;
 
     transform:translateX(-50%);
 
+    /* Tamaño del banner */
     width:320px;
-
     height:50px;
 
-    z-index:9999;
+    /* Siempre encima del contenido */
+    z-index:99999;
 
-    background:#0f172a;
-
+    /* Centrar el anuncio */
     display:flex;
 
     justify-content:center;
 
     align-items:center;
 
+    /* Fondo */
+    background:#0f172a;
+
+    /* Evita problemas de caja */
+    box-sizing:border-box;
+
 }
 
 
-/* En pantallas pequeñas */
+/* =========================
+   PANTALLAS PEQUEÑAS
+========================= */
 
-@media(max-width:360px){
+@media(max-width:320px){
 
     .banner-fijo{
 
         width:100%;
 
         height:50px;
+
+    }
+
+}
+
+
+/* =========================
+   TELEFONOS PEQUEÑOS
+========================= */
+
+@media(max-width:360px){
+
+    body{
+
+        padding-left:10px;
+
+        padding-right:10px;
+
+        padding-bottom:70px;
 
     }
 
@@ -159,11 +268,20 @@ body{
 ========================= -->
 
 <div class="titulo">
+
     ⚽ Agenda
+
 </div>
 
 
-<div class="fecha" id="fecha"></div>
+<!-- =========================
+     FECHA
+========================= -->
+
+<div
+    class="fecha"
+    id="fecha">
+</div>
 
 
 <!-- =========================
@@ -171,13 +289,15 @@ body{
 ========================= -->
 
 <div id="agenda">
+
     Cargando eventos...
+
 </div>
 
 
-
 <!-- ==================================================
-     BANNER 320x50 FIJO
+     BANNER 320x50
+     FIJO EN LA PARTE INFERIOR
      INDEPENDIENTE DE LA AGENDA
 ================================================== -->
 
@@ -202,10 +322,11 @@ atOptions = {
 </script>
 
 
-<script src="https://www.highrevenueformat.com/87d1ec21e806c5b1a6ac11839d2f031a/invoke.js"></script>
+<script
+    src="https://www.highrevenueformat.com/87d1ec21e806c5b1a6ac11839d2f031a/invoke.js">
+</script>
 
 </div>
-
 
 
 <script>
@@ -214,7 +335,8 @@ atOptions = {
    API DE LA AGENDA
 ========================= */
 
-const API="https://agenda18.com/agenda.json?v=1.12";
+const API =
+    "https://agenda18.com/agenda.json?v=1.12";
 
 
 /* =========================
@@ -223,9 +345,10 @@ const API="https://agenda18.com/agenda.json?v=1.12";
 
 function fechaHoy(){
 
-    let hoy=new Date();
+    let hoy = new Date();
 
-    let opciones={
+
+    let opciones = {
 
         weekday:'long',
 
@@ -237,11 +360,15 @@ function fechaHoy(){
 
     };
 
-    document.getElementById("fecha").innerText=
+
+    document.getElementById("fecha").innerText =
 
         hoy.toLocaleDateString(
+
             'es-ES',
+
             opciones
+
         );
 
 }
@@ -253,23 +380,35 @@ function fechaHoy(){
 
 function convertirHora(hora){
 
-    if(!hora) return "";
+    if(!hora)
 
-    let h=hora.split(":");
+        return "";
 
-    let date=new Date();
+
+    let h = hora.split(":");
+
+
+    let date = new Date();
+
 
     date.setHours(h[0]);
 
     date.setMinutes(h[1]);
 
-    return date.toLocaleTimeString([],{
 
-        hour:'2-digit',
+    return date.toLocaleTimeString(
 
-        minute:'2-digit'
+        [],
 
-    });
+        {
+
+            hour:'2-digit',
+
+            minute:'2-digit'
+
+        }
+
+    );
 
 }
 
@@ -280,17 +419,25 @@ function convertirHora(hora){
 
 function toggle(id){
 
-    let el=document.getElementById(
-        "links"+id
+    let el = document.getElementById(
+
+        "links" + id
+
     );
 
-    el.style.display=
 
-        el.style.display==="block"
+    if(!el)
 
-        ? "none"
+        return;
 
-        : "block";
+
+    el.style.display =
+
+        el.style.display === "block"
+
+            ? "none"
+
+            : "block";
 
 }
 
@@ -301,32 +448,40 @@ function toggle(id){
 
 function limpiarURL(url){
 
-    if(!url) return "";
+    if(!url)
+
+        return "";
 
 
     /* Si viene iframe */
 
     if(url.includes("<iframe")){
 
-        let match=url.match(
+        let match = url.match(
+
             /src="([^"]+)"/
+
         );
+
 
         if(match)
 
-            url=match[1];
+            url = match[1];
 
     }
 
 
-    url=url.trim();
+    url = url.trim();
 
 
     /* Quitar rutas embed */
 
-    url=url.replace(
+    url = url.replace(
+
         "/embed/eventos.html",
+
         ""
+
     );
 
 
@@ -334,15 +489,24 @@ function limpiarURL(url){
 
     if(url.includes("?r=")){
 
-        let parts=url.split("?r=");
+        let parts = url.split("?r=");
+
 
         if(parts[1]){
 
             try{
 
-                url=atob(parts[1]);
+                url = atob(parts[1]);
 
-            }catch(e){}
+            }
+
+            catch(e){
+
+                console.log(
+                    "Error decodificando URL"
+                );
+
+            }
 
         }
 
@@ -353,7 +517,7 @@ function limpiarURL(url){
 
     if(url.startsWith("//")){
 
-        url="https:"+url;
+        url = "https:" + url;
 
     }
 
@@ -362,8 +526,8 @@ function limpiarURL(url){
 
     if(url.startsWith("/")){
 
-        url=
-            "https://la14hd.com"+url;
+        url =
+            "https://la14hd.com" + url;
 
     }
 
@@ -372,7 +536,7 @@ function limpiarURL(url){
 
     if(!url.startsWith("http")){
 
-        url="https://"+url;
+        url = "https://" + url;
 
     }
 
@@ -390,11 +554,13 @@ async function cargarAgenda(){
 
     try{
 
-        let res=await fetch(API);
+        let res = await fetch(API);
 
-        let data=await res.json();
 
-        let html="";
+        let data = await res.json();
+
+
+        let html = "";
 
 
         data.data
@@ -402,136 +568,215 @@ async function cargarAgenda(){
         .filter(e =>
 
             e.attributes.deportes
-            .toLowerCase()=="futbol"
+
+            .toLowerCase() == "futbol"
 
         )
+
 
         .sort((a,b) =>
 
             a.attributes.diary_hour
+
             .localeCompare(
+
                 b.attributes.diary_hour
+
             )
 
         )
 
+
         .forEach((evento,i)=>{
 
 
-            let hora=
+            /* =====================
+               HORA
+            ===================== */
+
+            let hora =
 
                 convertirHora(
-                    evento.attributes.diary_hour
+
+                    evento.attributes
+
+                    .diary_hour
+
                 );
 
 
-            let desc=
+            /* =====================
+               DESCRIPCION
+            ===================== */
+
+            let desc =
 
                 evento.attributes
+
                 .diary_description;
 
 
-            /* Bandera */
+            /* =====================
+               BANDERA
+            ===================== */
 
-            let bandera=
+            let bandera =
 
                 "https://img.agenda18.com/uploads/sin_imagen_d36205f0e8.png";
 
 
             if(
-                evento.attributes.country.data
+
+                evento.attributes.country &&
+
+                evento.attributes.country.data &&
+
+                evento.attributes.country.data.attributes &&
+
+                evento.attributes.country.data.attributes.image &&
+
+                evento.attributes.country.data.attributes.image.data
+
             ){
 
-                bandera=
+                bandera =
 
-                    "https://img.agenda18.com"+
+                    "https://img.agenda18.com" +
 
                     evento.attributes.country
+
                     .data.attributes.image
+
                     .data.attributes.url;
 
             }
 
 
-            /* Evento */
+            /* =====================
+               EVENTO
+            ===================== */
 
-            html+=`
+            html += `
 
             <div
+
                 class="partido"
+
                 onclick="toggle(${i})"
+
             >
+
 
                 <div class="info">
 
+
                     <div class="hora">
+
                         ${hora}
+
                     </div>
+
 
                     <img
+
                         class="bandera"
+
                         src="${bandera}"
+
                     >
 
+
                     <div>
+
                         ${desc}
+
                     </div>
+
 
                 </div>
 
 
                 <div
+
                     class="links"
+
                     id="links${i}"
+
                 >
+
             `;
 
 
-            /* Enlaces */
+            /* =====================
+               ENLACES
+            ===================== */
 
-            evento.attributes.embeds.data
-            .forEach(embed=>{
+            if(
 
-                if(embed){
+                evento.attributes.embeds &&
 
-                    let urlOriginal=
+                evento.attributes.embeds.data
 
-                        limpiarURL(
-                            embed.attributes
-                            .embed_iframe
-                        );
+            ){
 
+                evento.attributes.embeds.data
 
-                    /* Enviar al reproductor */
-
-                    let urlPlayer=
-
-                        "https://verfutbollibre.github.io/eventos.html?r="+
-
-                        encodeURIComponent(
-                            btoa(urlOriginal)
-                        );
+                .forEach(embed=>{
 
 
-                    html+=`
-
-                    <a
-                        href="${urlPlayer}"
-                    >
-
-                        ▶
-                        ${embed.attributes.embed_name}
-
-                    </a>
-
-                    `;
-
-                }
-
-            });
+                    if(embed){
 
 
-            html+=`
+                        let urlOriginal =
+
+                            limpiarURL(
+
+                                embed.attributes
+
+                                .embed_iframe
+
+                            );
+
+
+                        /* =================
+                           URL DEL PLAYER
+                        ================= */
+
+                        let urlPlayer =
+
+                            "https://verfutbollibre.github.io/eventos.html?r=" +
+
+                            encodeURIComponent(
+
+                                btoa(urlOriginal)
+
+                            );
+
+
+                        html += `
+
+                        <a
+
+                            href="${urlPlayer}"
+
+                        >
+
+                            ▶
+
+                            ${embed.attributes.embed_name}
+
+                        </a>
+
+                        `;
+
+                    }
+
+                });
+
+            }
+
+
+            html += `
 
                 </div>
 
@@ -542,16 +787,30 @@ async function cargarAgenda(){
         });
 
 
-        document.getElementById(
-            "agenda"
-        ).innerHTML=html;
-
-
-    }catch(e){
+        /* =========================
+           MOSTRAR AGENDA
+        ========================= */
 
         document.getElementById(
+
             "agenda"
-        ).innerHTML=
+
+        ).innerHTML = html;
+
+
+    }
+
+    catch(e){
+
+        console.error(e);
+
+
+        document.getElementById(
+
+            "agenda"
+
+        ).innerHTML =
+
             "Error cargando eventos";
 
     }
@@ -574,8 +833,11 @@ cargarAgenda();
 ========================= */
 
 setInterval(
+
     cargarAgenda,
+
     60000
+
 );
 
 </script>
@@ -584,4 +846,4 @@ setInterval(
 </body>
 
 </html>
-```
+
