@@ -1,336 +1,587 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://pl16890700.profitablecpmratenetwork.com/fc/59/c7/fc59c75ecdfa550720a689e27f245d38.js"></script>
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Agenda Deportiva</title>
 
 <style>
 
+/* =========================
+   ESTILO GENERAL
+========================= */
+
 body{
-font-family:Arial;
-background:#0f172a;
-color:#e5e7eb;
-padding:20px;
-margin:0;
+    font-family:Arial, sans-serif;
+    background:#0f172a;
+    color:#e5e7eb;
+    padding:20px;
+    margin:0;
+
+    /* Espacio para que el banner fijo
+       no tape el último evento */
+    padding-bottom:90px;
 }
 
 .titulo{
-text-align:center;
-font-size:22px;
-margin-bottom:10px;
+    text-align:center;
+    font-size:22px;
+    margin-bottom:10px;
 }
 
 .fecha{
-text-align:center;
-color:#94a3b8;
-margin-bottom:20px;
+    text-align:center;
+    color:#94a3b8;
+    margin-bottom:20px;
 }
 
+
+/* =========================
+   AGENDA
+========================= */
+
 #agenda{
-max-width:750px;
-margin:auto;
-background:#1e293b;
-border-radius:10px;
-overflow:hidden;
+    max-width:750px;
+    margin:auto;
+    background:#1e293b;
+    border-radius:10px;
+    overflow:hidden;
 }
 
 .partido{
-padding:14px;
-border-bottom:1px solid #334155;
-cursor:pointer;
+    padding:14px;
+    border-bottom:1px solid #334155;
+    cursor:pointer;
 }
 
 .partido:hover{
-background:#334155;
+    background:#334155;
 }
 
 .info{
-display:flex;
-align-items:center;
-gap:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .hora{
-width:60px;
-font-weight:bold;
-color:#38bdf8;
+    width:60px;
+    font-weight:bold;
+    color:#38bdf8;
 }
 
 .bandera{
-width:22px;
-height:22px;
-border-radius:50%;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    object-fit:cover;
 }
 
 .links{
-display:none;
-padding:10px 20px;
-background:#020617;
+    display:none;
+    padding:10px 20px;
+    background:#020617;
 }
 
 .links a{
-display:block;
-background:#2563eb;
-padding:8px;
-margin:6px 0;
-border-radius:6px;
-color:white;
-text-decoration:none;
-font-size:14px;
+    display:block;
+    background:#2563eb;
+    padding:8px;
+    margin:6px 0;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+}
+
+
+/* =========================
+   BANNER FIJO
+========================= */
+
+.banner-fijo{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:0;
+
+    transform:translateX(-50%);
+
+    width:320px;
+
+    height:50px;
+
+    z-index:9999;
+
+    background:#0f172a;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/* En pantallas pequeñas */
+
+@media(max-width:360px){
+
+    .banner-fijo{
+
+        width:100%;
+
+        height:50px;
+
+    }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<div class="titulo">⚽ Agenda</div>
+
+<!-- =========================
+     TITULO
+========================= -->
+
+<div class="titulo">
+    ⚽ Agenda
+</div>
+
+
 <div class="fecha" id="fecha"></div>
 
-<div id="agenda">Cargando eventos...</div>
+
+<!-- =========================
+     AGENDA
+========================= -->
+
+<div id="agenda">
+    Cargando eventos...
+</div>
+
+
+
+<!-- ==================================================
+     BANNER 320x50 FIJO
+     INDEPENDIENTE DE LA AGENDA
+================================================== -->
+
+<div class="banner-fijo">
 
 <script>
+
+atOptions = {
+
+    'key' : '87d1ec21e806c5b1a6ac11839d2f031a',
+
+    'format' : 'iframe',
+
+    'height' : 50,
+
+    'width' : 320,
+
+    'params' : {}
+
+};
+
+</script>
+
+
+<script src="https://www.highrevenueformat.com/87d1ec21e806c5b1a6ac11839d2f031a/invoke.js"></script>
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   API DE LA AGENDA
+========================= */
 
 const API="https://agenda18.com/agenda.json?v=1.12";
 
-/* fecha automática */
+
+/* =========================
+   FECHA AUTOMÁTICA
+========================= */
 
 function fechaHoy(){
 
-let hoy=new Date();
+    let hoy=new Date();
 
-let opciones={
-weekday:'long',
-year:'numeric',
-month:'long',
-day:'numeric'
-};
+    let opciones={
 
-document.getElementById("fecha").innerText=
-hoy.toLocaleDateString('es-ES',opciones);
+        weekday:'long',
+
+        year:'numeric',
+
+        month:'long',
+
+        day:'numeric'
+
+    };
+
+    document.getElementById("fecha").innerText=
+
+        hoy.toLocaleDateString(
+            'es-ES',
+            opciones
+        );
 
 }
 
-/* convertir hora */
+
+/* =========================
+   CONVERTIR HORA
+========================= */
 
 function convertirHora(hora){
 
-if(!hora) return "";
+    if(!hora) return "";
 
-let h=hora.split(":");
+    let h=hora.split(":");
 
-let date=new Date();
+    let date=new Date();
 
-date.setHours(h[0]);
-date.setMinutes(h[1]);
+    date.setHours(h[0]);
 
-return date.toLocaleTimeString([],{
-hour:'2-digit',
-minute:'2-digit'
-});
+    date.setMinutes(h[1]);
 
-}
+    return date.toLocaleTimeString([],{
 
-/* abrir lista de canales */
+        hour:'2-digit',
 
-function toggle(id){
-
-let el=document.getElementById("links"+id);
-
-el.style.display=
-el.style.display==="block" ? "none":"block";
-
-}
-
-/* limpiar URL del iframe */
-
-function limpiarURL(url){
-
-if(!url) return "";
-
-/* si viene iframe */
-
-if(url.includes("<iframe")){
-let match=url.match(/src="([^"]+)"/);
-if(match) url=match[1];
-}
-
-url=url.trim();
-
-/* quitar rutas embed rotas */
-
-url=url.replace("/embed/eventos.html","");
-
-/* evitar doble base64 */
-
-if(url.includes("?r=")){
-let parts=url.split("?r=");
-if(parts[1]){
-try{
-url=atob(parts[1]);
-}catch(e){}
-}
-}
-
-/* protocolo */
-
-if(url.startsWith("//")){
-url="https:"+url;
-}
-
-/* ruta relativa */
-
-if(url.startsWith("/")){
-url="https://la14hd.com"+url;
-}
-
-/* si no tiene http */
-
-if(!url.startsWith("http")){
-url="https://"+url;
-}
-
-return url;
-
-}
-
-/* cargar agenda */
-
-async function cargarAgenda(){
-
-try{
-
-let res=await fetch(API);
-let data=await res.json();
-    
-let html="";
-
-data.data
-.filter(e=>e.attributes.deportes.toLowerCase()=="futbol")
-.sort((a,b)=>a.attributes.diary_hour.localeCompare(b.attributes.diary_hour))
-.forEach((evento,i)=>{
-
-let hora=convertirHora(evento.attributes.diary_hour);
-let desc=evento.attributes.diary_description;
-
-let bandera="https://img.agenda18.com/uploads/sin_imagen_d36205f0e8.png";
-
-if(evento.attributes.country.data){
-
-bandera="https://img.agenda18.com"+
-evento.attributes.country.data.attributes.image.data.attributes.url;
-
-}
-
-html+=`
-
-<div class="partido" onclick="toggle(${i})">
-
-<div class="info">
-<div class="hora">${hora}</div>
-<img class="bandera" src="${bandera}">
-<div>${desc}</div>
-</div>
-
-<div class="links" id="links${i}">
-`;
-
-evento.attributes.embeds.data.forEach(embed=>{
-
-if(embed){
-
-let urlOriginal=limpiarURL(embed.attributes.embed_iframe);
-
-/* enviar al reproductor */
-
-let urlPlayer="https://verfutbollibre.github.io/eventos.html?r="+encodeURIComponent(btoa(urlOriginal));
-
-html+=`
-<a href="${urlPlayer}">
-▶ ${embed.attributes.embed_name}
-</a>
-`;
-
-}
-
-});
-
-html+=`</div></div>`;
-
-});
-
-document.getElementById("agenda").innerHTML=html;
-
-}catch(e){
-
-document.getElementById("agenda").innerHTML="Error cargando eventos";
-
-}
-
-}
-
-/* iniciar */
-
-fechaHoy();
-cargarAgenda();
-
-/* actualizar agenda */
-
-setInterval(cargarAgenda,60000);
-
-</script>
-
-</body>
-</html> 
---------------------------------------
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    // 🔧 CONFIGURA AQUÍ
-    // Horario original del listado (ejemplo: España = +1)
-    const zonaOrigen = 1;
-
-    // Horario destino
-    // Perú / Colombia = -5
-    const zonaDestino = -5;
-
-    const diferencia = zonaDestino - zonaOrigen;
-
-    document.querySelectorAll(".t").forEach(function(el) {
-
-        const texto = el.textContent.trim();
-        if(!texto.includes(":")) return;
-
-        let [h, m] = texto.split(":").map(Number);
-
-        h = h + diferencia;
-
-        if (h < 0) h += 24;
-        if (h >= 24) h -= 24;
-
-        el.textContent =
-            String(h).padStart(2, "0") + ":" +
-            String(m).padStart(2, "0");
+        minute:'2-digit'
 
     });
 
-});
+}
+
+
+/* =========================
+   ABRIR / CERRAR CANALES
+========================= */
+
+function toggle(id){
+
+    let el=document.getElementById(
+        "links"+id
+    );
+
+    el.style.display=
+
+        el.style.display==="block"
+
+        ? "none"
+
+        : "block";
+
+}
+
+
+/* =========================
+   LIMPIAR URL DEL IFRAME
+========================= */
+
+function limpiarURL(url){
+
+    if(!url) return "";
+
+
+    /* Si viene iframe */
+
+    if(url.includes("<iframe")){
+
+        let match=url.match(
+            /src="([^"]+)"/
+        );
+
+        if(match)
+
+            url=match[1];
+
+    }
+
+
+    url=url.trim();
+
+
+    /* Quitar rutas embed */
+
+    url=url.replace(
+        "/embed/eventos.html",
+        ""
+    );
+
+
+    /* Evitar doble base64 */
+
+    if(url.includes("?r=")){
+
+        let parts=url.split("?r=");
+
+        if(parts[1]){
+
+            try{
+
+                url=atob(parts[1]);
+
+            }catch(e){}
+
+        }
+
+    }
+
+
+    /* Protocolo */
+
+    if(url.startsWith("//")){
+
+        url="https:"+url;
+
+    }
+
+
+    /* Ruta relativa */
+
+    if(url.startsWith("/")){
+
+        url=
+            "https://la14hd.com"+url;
+
+    }
+
+
+    /* Si no tiene http */
+
+    if(!url.startsWith("http")){
+
+        url="https://"+url;
+
+    }
+
+
+    return url;
+
+}
+
+
+/* =========================
+   CARGAR AGENDA
+========================= */
+
+async function cargarAgenda(){
+
+    try{
+
+        let res=await fetch(API);
+
+        let data=await res.json();
+
+        let html="";
+
+
+        data.data
+
+        .filter(e =>
+
+            e.attributes.deportes
+            .toLowerCase()=="futbol"
+
+        )
+
+        .sort((a,b) =>
+
+            a.attributes.diary_hour
+            .localeCompare(
+                b.attributes.diary_hour
+            )
+
+        )
+
+        .forEach((evento,i)=>{
+
+
+            let hora=
+
+                convertirHora(
+                    evento.attributes.diary_hour
+                );
+
+
+            let desc=
+
+                evento.attributes
+                .diary_description;
+
+
+            /* Bandera */
+
+            let bandera=
+
+                "https://img.agenda18.com/uploads/sin_imagen_d36205f0e8.png";
+
+
+            if(
+                evento.attributes.country.data
+            ){
+
+                bandera=
+
+                    "https://img.agenda18.com"+
+
+                    evento.attributes.country
+                    .data.attributes.image
+                    .data.attributes.url;
+
+            }
+
+
+            /* Evento */
+
+            html+=`
+
+            <div
+                class="partido"
+                onclick="toggle(${i})"
+            >
+
+                <div class="info">
+
+                    <div class="hora">
+                        ${hora}
+                    </div>
+
+                    <img
+                        class="bandera"
+                        src="${bandera}"
+                    >
+
+                    <div>
+                        ${desc}
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="links"
+                    id="links${i}"
+                >
+            `;
+
+
+            /* Enlaces */
+
+            evento.attributes.embeds.data
+            .forEach(embed=>{
+
+                if(embed){
+
+                    let urlOriginal=
+
+                        limpiarURL(
+                            embed.attributes
+                            .embed_iframe
+                        );
+
+
+                    /* Enviar al reproductor */
+
+                    let urlPlayer=
+
+                        "https://verfutbollibre.github.io/eventos.html?r="+
+
+                        encodeURIComponent(
+                            btoa(urlOriginal)
+                        );
+
+
+                    html+=`
+
+                    <a
+                        href="${urlPlayer}"
+                    >
+
+                        ▶
+                        ${embed.attributes.embed_name}
+
+                    </a>
+
+                    `;
+
+                }
+
+            });
+
+
+            html+=`
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
+
+
+        document.getElementById(
+            "agenda"
+        ).innerHTML=html;
+
+
+    }catch(e){
+
+        document.getElementById(
+            "agenda"
+        ).innerHTML=
+            "Error cargando eventos";
+
+    }
+
+}
+
+
+/* =========================
+   INICIAR
+========================= */
+
+fechaHoy();
+
+cargarAgenda();
+
+
+/* =========================
+   ACTUALIZAR AGENDA
+   CADA 60 SEGUNDOS
+========================= */
+
+setInterval(
+    cargarAgenda,
+    60000
+);
+
 </script>
 
-<script async="async" data-cfasync="false" src="https://pl16550761.profitablecpmratenetwork.com/78e796a34647115581861ea99c7b18cd/invoke.js"></script>
-<div id="container-78e796a34647115581861ea99c7b18cd"></div> 
 
+</body>
 
-<script>
-  atOptions = {
-    'key' : '87d1ec21e806c5b1a6ac11839d2f031a',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/87d1ec21e806c5b1a6ac11839d2f031a/invoke.js"></script>
+</html>
+```
