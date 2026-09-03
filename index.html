@@ -8,7 +8,15 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
+<!-- =========================
+     ANUNCIO ANTERIOR 1
+========================= -->
+
+<script src="https://pl16890700.profitablecpmratenetwork.com/fc/59/c7/fc59c75ecdfa550720a689e27f245d38.js"></script>
+
+
 <title>Agenda Deportiva</title>
+
 
 <style>
 
@@ -26,16 +34,16 @@ body{
 
 body{
     font-family:Arial, sans-serif;
+
     background:#0f172a;
+
     color:#e5e7eb;
 
-    /* Espacio lateral */
     padding-left:20px;
     padding-right:20px;
 
-    /* IMPORTANTE:
-       espacio para el banner fijo */
-    padding-bottom:70px;
+    /* Espacio para el banner inferior */
+    padding-bottom:75px;
 
     box-sizing:border-box;
 }
@@ -47,8 +55,11 @@ body{
 
 .titulo{
     text-align:center;
+
     font-size:22px;
+
     margin-top:20px;
+
     margin-bottom:10px;
 }
 
@@ -59,7 +70,9 @@ body{
 
 .fecha{
     text-align:center;
+
     color:#94a3b8;
+
     margin-bottom:20px;
 }
 
@@ -69,7 +82,9 @@ body{
 ========================= */
 
 #agenda{
+
     width:100%;
+
     max-width:750px;
 
     margin:0 auto;
@@ -87,6 +102,7 @@ body{
 ========================= */
 
 .partido{
+
     padding:14px;
 
     border-bottom:1px solid #334155;
@@ -97,6 +113,7 @@ body{
 }
 
 .partido:hover{
+
     background:#334155;
 }
 
@@ -106,6 +123,7 @@ body{
 ========================= */
 
 .info{
+
     display:flex;
 
     align-items:center;
@@ -119,6 +137,7 @@ body{
 ========================= */
 
 .hora{
+
     width:60px;
 
     flex-shrink:0;
@@ -134,7 +153,9 @@ body{
 ========================= */
 
 .bandera{
+
     width:22px;
+
     height:22px;
 
     flex-shrink:0;
@@ -150,6 +171,7 @@ body{
 ========================= */
 
 .links{
+
     display:none;
 
     padding:10px 20px;
@@ -163,6 +185,7 @@ body{
 ========================= */
 
 .links a{
+
     display:block;
 
     background:#2563eb;
@@ -181,67 +204,69 @@ body{
 }
 
 
-/* =========================
-   BANNER FIJO INFERIOR
-========================= */
+/* =================================================
+   ANUNCIO ANTERIOR 2
+   CONTENEDOR
+================================================= */
+
+#container-78e796a34647115581861ea99c7b18cd{
+
+    width:100%;
+
+    text-align:center;
+
+    margin:15px auto;
+
+}
+
+
+/* =================================================
+   BANNER NUEVO FIJO INFERIOR
+   360 x 60
+================================================= */
 
 .banner-fijo{
 
     position:fixed;
 
-    /* Pegado abajo */
     bottom:0;
 
-    /* Centrado horizontal */
     left:50%;
 
     transform:translateX(-50%);
 
-    /* Tamaño del banner */
-    width:320px;
-    height:50px;
+    width:360px;
 
-    /* Siempre encima del contenido */
+    height:60px;
+
     z-index:99999;
 
-    /* Centrar el anuncio */
     display:flex;
 
     justify-content:center;
 
     align-items:center;
 
-    /* Fondo */
     background:#0f172a;
 
-    /* Evita problemas de caja */
     box-sizing:border-box;
 
 }
 
 
 /* =========================
-   PANTALLAS PEQUEÑAS
+   PANTALLAS HASTA 360px
 ========================= */
 
-@media(max-width:320px){
+@media(max-width:360px){
 
     .banner-fijo{
 
         width:100%;
 
-        height:50px;
+        height:60px;
 
     }
-
-}
-
-
-/* =========================
-   TELEFONOS PEQUEÑOS
-========================= */
-
-@media(max-width:360px){
 
     body{
 
@@ -250,6 +275,23 @@ body{
         padding-right:10px;
 
         padding-bottom:70px;
+
+    }
+
+}
+
+
+/* =========================
+   PANTALLAS MUY PEQUEÑAS
+========================= */
+
+@media(max-width:320px){
+
+    .banner-fijo{
+
+        width:100%;
+
+        height:60px;
 
     }
 
@@ -295,11 +337,25 @@ body{
 </div>
 
 
-<!-- ==================================================
-     BANNER 320x50
-     FIJO EN LA PARTE INFERIOR
-     INDEPENDIENTE DE LA AGENDA
-================================================== -->
+<!-- =================================================
+     ANUNCIO ANTERIOR 2
+================================================= -->
+
+<script
+    async="async"
+    data-cfasync="false"
+    src="https://pl16550761.profitablecpmratenetwork.com/78e796a34647115581861ea99c7b18cd/invoke.js">
+</script>
+
+<div
+    id="container-78e796a34647115581861ea99c7b18cd">
+</div>
+
+
+<!-- =================================================
+     NUEVO BANNER FIJO INFERIOR
+     360 x 60
+================================================= -->
 
 <div class="banner-fijo">
 
@@ -311,9 +367,9 @@ atOptions = {
 
     'format' : 'iframe',
 
-    'height' : 50,
+    'height' : 60,
 
-    'width' : 320,
+    'width' : 360,
 
     'params' : {}
 
@@ -347,7 +403,6 @@ function fechaHoy(){
 
     let hoy = new Date();
 
-
     let opciones = {
 
         weekday:'long',
@@ -359,7 +414,6 @@ function fechaHoy(){
         day:'numeric'
 
     };
-
 
     document.getElementById("fecha").innerText =
 
@@ -443,7 +497,7 @@ function toggle(id){
 
 
 /* =========================
-   LIMPIAR URL DEL IFRAME
+   LIMPIAR URL
 ========================= */
 
 function limpiarURL(url){
@@ -503,7 +557,9 @@ function limpiarURL(url){
             catch(e){
 
                 console.log(
+
                     "Error decodificando URL"
+
                 );
 
             }
@@ -567,9 +623,11 @@ async function cargarAgenda(){
 
         .filter(e =>
 
+            e.attributes.deportes &&
+
             e.attributes.deportes
 
-            .toLowerCase() == "futbol"
+                .toLowerCase() == "futbol"
 
         )
 
@@ -578,11 +636,11 @@ async function cargarAgenda(){
 
             a.attributes.diary_hour
 
-            .localeCompare(
+                .localeCompare(
 
-                b.attributes.diary_hour
+                    b.attributes.diary_hour
 
-            )
+                )
 
         )
 
@@ -600,7 +658,7 @@ async function cargarAgenda(){
 
                     evento.attributes
 
-                    .diary_hour
+                        .diary_hour
 
                 );
 
@@ -613,7 +671,7 @@ async function cargarAgenda(){
 
                 evento.attributes
 
-                .diary_description;
+                    .diary_description || "";
 
 
             /* =====================
@@ -645,9 +703,9 @@ async function cargarAgenda(){
 
                     evento.attributes.country
 
-                    .data.attributes.image
+                        .data.attributes.image
 
-                    .data.attributes.url;
+                        .data.attributes.url;
 
             }
 
@@ -721,57 +779,57 @@ async function cargarAgenda(){
 
                 evento.attributes.embeds.data
 
-                .forEach(embed=>{
+                    .forEach(embed=>{
 
 
-                    if(embed){
+                        if(embed){
 
 
-                        let urlOriginal =
+                            let urlOriginal =
 
-                            limpiarURL(
+                                limpiarURL(
 
-                                embed.attributes
+                                    embed.attributes
 
-                                .embed_iframe
+                                        .embed_iframe
 
-                            );
-
-
-                        /* =================
-                           URL DEL PLAYER
-                        ================= */
-
-                        let urlPlayer =
-
-                            "https://verfutbollibre.github.io/eventos.html?r=" +
-
-                            encodeURIComponent(
-
-                                btoa(urlOriginal)
-
-                            );
+                                );
 
 
-                        html += `
+                            /* =================
+                               URL DEL PLAYER
+                            ================= */
 
-                        <a
+                            let urlPlayer =
 
-                            href="${urlPlayer}"
+                                "https://verfutbollibre.github.io/eventos.html?r=" +
 
-                        >
+                                encodeURIComponent(
 
-                            ▶
+                                    btoa(urlOriginal)
 
-                            ${embed.attributes.embed_name}
+                                );
 
-                        </a>
 
-                        `;
+                            html += `
 
-                    }
+                            <a
 
-                });
+                                href="${urlPlayer}"
+
+                            >
+
+                                ▶
+
+                                ${embed.attributes.embed_name}
+
+                            </a>
+
+                            `;
+
+                        }
+
+                    });
 
             }
 
@@ -837,6 +895,84 @@ setInterval(
     cargarAgenda,
 
     60000
+
+);
+
+</script>
+
+
+<!-- =================================================
+     AJUSTE DE HORARIO
+     ESPAÑA (+1) → PERÚ (-5)
+================================================= -->
+
+<script>
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+        const zonaOrigen = 1;
+
+        const zonaDestino = -5;
+
+        const diferencia =
+
+            zonaDestino - zonaOrigen;
+
+
+        document
+
+            .querySelectorAll(".t")
+
+            .forEach(function(el){
+
+
+                const texto =
+
+                    el.textContent.trim();
+
+
+                if(!texto.includes(":"))
+
+                    return;
+
+
+                let [h,m] =
+
+                    texto
+
+                        .split(":")
+
+                        .map(Number);
+
+
+                h = h + diferencia;
+
+
+                if(h < 0)
+
+                    h += 24;
+
+
+                if(h >= 24)
+
+                    h -= 24;
+
+
+                el.textContent =
+
+                    String(h).padStart(2,"0") +
+
+                    ":" +
+
+                    String(m).padStart(2,"0");
+
+            });
+
+    }
 
 );
 
