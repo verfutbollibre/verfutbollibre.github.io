@@ -14,9 +14,7 @@
 
 <script src="https://pl16890700.profitablecpmratenetwork.com/fc/59/c7/fc59c75ecdfa550720a689e27f245d38.js"></script>
 
-
 <title>Agenda Deportiva</title>
-
 
 <style>
 
@@ -34,15 +32,11 @@ body{
 
 body{
     font-family:Arial, sans-serif;
-
     background:#0f172a;
-
     color:#e5e7eb;
 
     padding-left:20px;
     padding-right:20px;
-
-    /* Espacio para el banner inferior */
     padding-bottom:75px;
 
     box-sizing:border-box;
@@ -55,11 +49,8 @@ body{
 
 .titulo{
     text-align:center;
-
     font-size:22px;
-
     margin-top:20px;
-
     margin-bottom:10px;
 }
 
@@ -70,9 +61,7 @@ body{
 
 .fecha{
     text-align:center;
-
     color:#94a3b8;
-
     margin-bottom:20px;
 }
 
@@ -82,17 +71,11 @@ body{
 ========================= */
 
 #agenda{
-
     width:100%;
-
     max-width:750px;
-
     margin:0 auto;
-
     background:#1e293b;
-
     border-radius:10px;
-
     overflow:hidden;
 }
 
@@ -102,18 +85,13 @@ body{
 ========================= */
 
 .partido{
-
     padding:14px;
-
     border-bottom:1px solid #334155;
-
     cursor:pointer;
-
     box-sizing:border-box;
 }
 
 .partido:hover{
-
     background:#334155;
 }
 
@@ -123,11 +101,8 @@ body{
 ========================= */
 
 .info{
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
 }
 
@@ -137,13 +112,9 @@ body{
 ========================= */
 
 .hora{
-
     width:60px;
-
     flex-shrink:0;
-
     font-weight:bold;
-
     color:#38bdf8;
 }
 
@@ -153,15 +124,10 @@ body{
 ========================= */
 
 .bandera{
-
     width:22px;
-
     height:22px;
-
     flex-shrink:0;
-
     border-radius:50%;
-
     object-fit:cover;
 }
 
@@ -171,11 +137,8 @@ body{
 ========================= */
 
 .links{
-
     display:none;
-
     padding:10px 20px;
-
     background:#020617;
 }
 
@@ -185,71 +148,144 @@ body{
 ========================= */
 
 .links a{
-
     display:block;
-
     background:#2563eb;
-
     padding:8px;
-
     margin:6px 0;
-
     border-radius:6px;
-
     color:white;
-
     text-decoration:none;
-
     font-size:14px;
 }
 
 
 /* =================================================
    ANUNCIO ANTERIOR 2
-   CONTENEDOR
 ================================================= */
 
 #container-78e796a34647115581861ea99c7b18cd{
-
     width:100%;
-
     text-align:center;
-
     margin:15px auto;
-
 }
 
 
 /* =================================================
    BANNER NUEVO FIJO INFERIOR
-   360 x 60
 ================================================= */
 
 .banner-fijo{
-
     position:fixed;
 
     bottom:0;
-
     left:50%;
 
     transform:translateX(-50%);
 
     width:360px;
-
     height:60px;
 
     z-index:99999;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
     background:#0f172a;
 
     box-sizing:border-box;
+}
+
+
+/* =================================================
+   TELEGRAM FLOTANTE
+================================================= */
+
+.telegram-float{
+
+    position:fixed;
+
+    right:18px;
+    bottom:82px;
+
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    background:#229ED9;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:99998;
+
+    text-decoration:none;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.45);
+
+    cursor:pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+/* ICONO */
+
+.telegram-float svg{
+
+    width:28px;
+    height:28px;
+
+    fill:#ffffff;
+
+    pointer-events:none;
+}
+
+
+/* EFECTO */
+
+.telegram-float:hover{
+
+    transform:scale(1.10);
+
+    box-shadow:
+        0 7px 25px rgba(34,158,217,.65);
+}
+
+
+.telegram-float:active{
+
+    transform:scale(.95);
+
+}
+
+
+/* =========================
+   MOVIL
+========================= */
+
+@media(max-width:600px){
+
+    .telegram-float{
+
+        right:14px;
+        bottom:78px;
+
+        width:48px;
+        height:48px;
+    }
+
+    .telegram-float svg{
+
+        width:26px;
+        height:26px;
+    }
 
 }
 
@@ -263,19 +299,14 @@ body{
     .banner-fijo{
 
         width:100%;
-
         height:60px;
-
     }
 
     body{
 
         padding-left:10px;
-
         padding-right:10px;
-
         padding-bottom:70px;
-
     }
 
 }
@@ -290,62 +321,9 @@ body{
     .banner-fijo{
 
         width:100%;
-
         height:60px;
-
     }
 
-}
-
-
-/* =========================
-   BOTÓN TELEGRAM FLOTANTE
-   ========================= */
-
-.telegram-float{
-    position:fixed;
-    right:18px;
-    bottom:82px;
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    background:#229ED9;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:99998;
-    text-decoration:none;
-    box-shadow:0 5px 18px rgba(0,0,0,.45);
-    transition:transform .25s ease, box-shadow .25s ease;
-}
-
-.telegram-float svg{
-    width:28px;
-    height:28px;
-    fill:#ffffff;
-}
-
-.telegram-float:hover{
-    transform:scale(1.10);
-    box-shadow:0 7px 25px rgba(34,158,217,.65);
-}
-
-.telegram-float:active{
-    transform:scale(.95);
-}
-
-@media(max-width:600px){
-    .telegram-float{
-        right:14px;
-        bottom:78px;
-        width:48px;
-        height:48px;
-    }
-
-    .telegram-float svg{
-        width:26px;
-        height:26px;
-    }
 }
 
 </style>
@@ -403,28 +381,30 @@ body{
 </div>
 
 
-
-<!-- =========================
+<!-- =================================================
      BOTÓN TELEGRAM
-     ========================= -->
+================================================= -->
 
 <a
-    href="https://t.me/tvlatin2021"
-    target="_blank"
-    rel="noopener noreferrer"
+    href="tg://resolve?domain=tvlatin2021"
     class="telegram-float"
-    aria-label="Unirse a Telegram"
+    aria-label="Abrir Telegram"
+    onclick="abrirTelegram(event)"
 >
 
-    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true">
+
         <path d="M21.8 3.2L18.5 20c-.25 1.18-.92 1.47-1.86.92l-5.1-3.76-2.46 2.37c-.27.27-.5.5-1.02.5l.36-5.2 9.46-8.55c.41-.36-.09-.56-.64-.2L5.55 13.5.56 11.7c-1.17-.37-1.2-1.17.24-1.73L20.55 4.1c.97-.36 1.82.22 1.25-.9z"/>
+
     </svg>
 
 </a>
 
+
 <!-- =================================================
-     NUEVO BANNER FIJO INFERIOR
-     360 x 60
+     BANNER FIJO
 ================================================= -->
 
 <div class="banner-fijo">
@@ -457,17 +437,63 @@ atOptions = {
 
 <script>
 
-/* =========================
+/* =================================================
+   TELEGRAM
+================================================= */
+
+function abrirTelegram(event){
+
+    event.preventDefault();
+
+    /*
+       Enlace directo a la aplicación
+    */
+
+    const telegramApp =
+        "tg://resolve?domain=tvlatin2021";
+
+
+    /*
+       Enlace web alternativo
+    */
+
+    const telegramWeb =
+        "https://t.me/tvlatin2021";
+
+
+    /*
+       Intentar abrir Telegram
+    */
+
+    window.location.href = telegramApp;
+
+
+    /*
+       Si no se abrió la aplicación,
+       intentar versión web.
+    */
+
+    setTimeout(function(){
+
+        window.location.href =
+            telegramWeb;
+
+    },1500);
+
+}
+
+
+/* =================================================
    API DE LA AGENDA
-========================= */
+================================================= */
 
 const API =
     "https://agenda18.com/agenda.json?v=1.12";
 
 
-/* =========================
+/* =================================================
    FECHA AUTOMÁTICA
-========================= */
+================================================= */
 
 function fechaHoy(){
 
@@ -498,9 +524,9 @@ function fechaHoy(){
 }
 
 
-/* =========================
+/* =================================================
    CONVERTIR HORA
-========================= */
+================================================= */
 
 function convertirHora(hora){
 
@@ -537,9 +563,9 @@ function convertirHora(hora){
 }
 
 
-/* =========================
+/* =================================================
    ABRIR / CERRAR CANALES
-========================= */
+================================================= */
 
 function toggle(id){
 
@@ -566,9 +592,9 @@ function toggle(id){
 }
 
 
-/* =========================
+/* =================================================
    LIMPIAR URL
-========================= */
+================================================= */
 
 function limpiarURL(url){
 
@@ -577,7 +603,9 @@ function limpiarURL(url){
         return "";
 
 
-    /* Si viene iframe */
+    /*
+       Si viene iframe
+    */
 
     if(url.includes("<iframe")){
 
@@ -598,7 +626,9 @@ function limpiarURL(url){
     url = url.trim();
 
 
-    /* Quitar rutas embed */
+    /*
+       Quitar rutas embed
+    */
 
     url = url.replace(
 
@@ -609,7 +639,9 @@ function limpiarURL(url){
     );
 
 
-    /* Evitar doble base64 */
+    /*
+       Evitar doble base64
+    */
 
     if(url.includes("?r=")){
 
@@ -639,7 +671,9 @@ function limpiarURL(url){
     }
 
 
-    /* Protocolo */
+    /*
+       Protocolo
+    */
 
     if(url.startsWith("//")){
 
@@ -648,7 +682,9 @@ function limpiarURL(url){
     }
 
 
-    /* Ruta relativa */
+    /*
+       Ruta relativa
+    */
 
     if(url.startsWith("/")){
 
@@ -658,7 +694,9 @@ function limpiarURL(url){
     }
 
 
-    /* Si no tiene http */
+    /*
+       Si no tiene http
+    */
 
     if(!url.startsWith("http")){
 
@@ -672,9 +710,9 @@ function limpiarURL(url){
 }
 
 
-/* =========================
+/* =================================================
    CARGAR AGENDA
-========================= */
+================================================= */
 
 async function cargarAgenda(){
 
@@ -718,9 +756,9 @@ async function cargarAgenda(){
         .forEach((evento,i)=>{
 
 
-            /* =====================
+            /*
                HORA
-            ===================== */
+            */
 
             let hora =
 
@@ -733,9 +771,9 @@ async function cargarAgenda(){
                 );
 
 
-            /* =====================
+            /*
                DESCRIPCION
-            ===================== */
+            */
 
             let desc =
 
@@ -744,9 +782,9 @@ async function cargarAgenda(){
                     .diary_description || "";
 
 
-            /* =====================
+            /*
                BANDERA
-            ===================== */
+            */
 
             let bandera =
 
@@ -780,9 +818,9 @@ async function cargarAgenda(){
             }
 
 
-            /* =====================
+            /*
                EVENTO
-            ===================== */
+            */
 
             html += `
 
@@ -794,9 +832,7 @@ async function cargarAgenda(){
 
             >
 
-
                 <div class="info">
-
 
                     <div class="hora">
 
@@ -820,7 +856,6 @@ async function cargarAgenda(){
 
                     </div>
 
-
                 </div>
 
 
@@ -835,9 +870,9 @@ async function cargarAgenda(){
             `;
 
 
-            /* =====================
+            /*
                ENLACES
-            ===================== */
+            */
 
             if(
 
@@ -866,9 +901,9 @@ async function cargarAgenda(){
                                 );
 
 
-                            /* =================
+                            /*
                                URL DEL PLAYER
-                            ================= */
+                            */
 
                             let urlPlayer =
 
@@ -886,6 +921,8 @@ async function cargarAgenda(){
                             <a
 
                                 href="${urlPlayer}"
+
+                                onclick="event.stopPropagation();"
 
                             >
 
@@ -915,9 +952,9 @@ async function cargarAgenda(){
         });
 
 
-        /* =========================
+        /*
            MOSTRAR AGENDA
-        ========================= */
+        */
 
         document.getElementById(
 
@@ -946,19 +983,18 @@ async function cargarAgenda(){
 }
 
 
-/* =========================
+/* =================================================
    INICIAR
-========================= */
+================================================= */
 
 fechaHoy();
 
 cargarAgenda();
 
 
-/* =========================
+/* =================================================
    ACTUALIZAR AGENDA
-   CADA 60 SEGUNDOS
-========================= */
+================================================= */
 
 setInterval(
 
@@ -973,7 +1009,6 @@ setInterval(
 
 <!-- =================================================
      AJUSTE DE HORARIO
-     ESPAÑA (+1) → PERÚ (-5)
 ================================================= -->
 
 <script>
@@ -1046,9 +1081,52 @@ document.addEventListener(
 
 );
 
+
+/* =================================================
+   SEGURIDAD EXTRA TELEGRAM
+================================================= */
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function(){
+
+        const telegram =
+
+            document.querySelector(
+
+                ".telegram-float"
+
+            );
+
+
+        if(telegram){
+
+            telegram.setAttribute(
+
+                "href",
+
+                "tg://resolve?domain=tvlatin2021"
+
+            );
+
+        }
+
+    }
+
+);
+
 </script>
 
 
-</body>
+<!-- =================================================
+     ANUNCIO FINAL
+================================================= -->
+
 <script src="https://pl16890700.profitableratecpmnetwork.com/fc/59/c7/fc59c75ecdfa550720a689e27f245d38.js"></script>
+
+
+</body>
+
 </html>
