@@ -297,6 +297,57 @@ body{
 
 }
 
+
+/* =========================
+   BOTÓN TELEGRAM FLOTANTE
+   ========================= */
+
+.telegram-float{
+    position:fixed;
+    right:18px;
+    bottom:82px;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:#229ED9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:99998;
+    text-decoration:none;
+    box-shadow:0 5px 18px rgba(0,0,0,.45);
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.telegram-float svg{
+    width:28px;
+    height:28px;
+    fill:#ffffff;
+}
+
+.telegram-float:hover{
+    transform:scale(1.10);
+    box-shadow:0 7px 25px rgba(34,158,217,.65);
+}
+
+.telegram-float:active{
+    transform:scale(.95);
+}
+
+@media(max-width:600px){
+    .telegram-float{
+        right:14px;
+        bottom:78px;
+        width:48px;
+        height:48px;
+    }
+
+    .telegram-float svg{
+        width:26px;
+        height:26px;
+    }
+}
+
 </style>
 
 </head>
@@ -351,6 +402,25 @@ body{
     id="container-78e796a34647115581861ea99c7b18cd">
 </div>
 
+
+
+<!-- =========================
+     BOTÓN TELEGRAM
+     ========================= -->
+
+<a
+    href="https://t.me/tvlatin2021"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="telegram-float"
+    aria-label="Unirse a Telegram"
+>
+
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M21.8 3.2L18.5 20c-.25 1.18-.92 1.47-1.86.92l-5.1-3.76-2.46 2.37c-.27.27-.5.5-1.02.5l.36-5.2 9.46-8.55c.41-.36-.09-.56-.64-.2L5.55 13.5.56 11.7c-1.17-.37-1.2-1.17.24-1.73L20.55 4.1c.97-.36 1.82.22 1.25-.9z"/>
+    </svg>
+
+</a>
 
 <!-- =================================================
      NUEVO BANNER FIJO INFERIOR
@@ -982,5 +1052,3 @@ document.addEventListener(
 </body>
 <script src="https://pl16890700.profitableratecpmnetwork.com/fc/59/c7/fc59c75ecdfa550720a689e27f245d38.js"></script>
 </html>
-
-
