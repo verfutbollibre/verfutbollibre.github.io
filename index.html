@@ -87,7 +87,7 @@ body{
 
 
 /* =========================
-   EVENTO
+   PARTIDO
 ========================= */
 
 .partido{
@@ -98,9 +98,6 @@ body{
     cursor:pointer;
 
     box-sizing:border-box;
-
-    transition:
-        background .2s ease;
 }
 
 .partido:hover{
@@ -126,72 +123,29 @@ body{
 ========================= */
 
 .hora{
-    width:65px;
+    width:60px;
 
     flex-shrink:0;
 
     font-weight:bold;
 
     color:#38bdf8;
-
-    font-size:14px;
 }
 
 
 /* =========================
-   ICONO COMPETICION
+   BANDERA
 ========================= */
 
 .bandera{
-    width:38px;
-    height:38px;
+    width:22px;
+    height:22px;
 
     flex-shrink:0;
 
     border-radius:50%;
 
     object-fit:cover;
-
-    background:#334155;
-
-    border:1px solid #475569;
-
-    display:block;
-}
-
-
-/* =========================
-   NOMBRE EVENTO
-========================= */
-
-.nombre-evento{
-
-    flex:1;
-
-    line-height:1.35;
-
-    font-size:14px;
-
-    color:#f1f5f9;
-
-    white-space:pre-line;
-}
-
-
-/* =========================
-   FLECHA
-========================= */
-
-.flecha{
-
-    font-size:16px;
-
-    color:#94a3b8;
-
-    flex-shrink:0;
-
-    transition:
-        transform .2s ease;
 }
 
 
@@ -217,7 +171,7 @@ body{
 
     background:#2563eb;
 
-    padding:9px;
+    padding:8px;
 
     margin:6px 0;
 
@@ -228,17 +182,10 @@ body{
     text-decoration:none;
 
     font-size:14px;
-
-    transition:
-        background .2s ease,
-        transform .15s ease;
 }
 
 .links a:hover{
-
     background:#1d4ed8;
-
-    transform:translateX(2px);
 }
 
 
@@ -247,7 +194,6 @@ body{
 ========================= */
 
 .mensaje{
-
     padding:20px;
 
     text-align:center;
@@ -261,7 +207,6 @@ body{
 ================================================= */
 
 #container-78e796a34647115581861ea99c7b18cd{
-
     width:100%;
 
     text-align:center;
@@ -271,7 +216,7 @@ body{
 
 
 /* =================================================
-   BANNER FIJO
+   BANNER FIJO INFERIOR
 ================================================= */
 
 .banner-fijo{
@@ -376,14 +321,6 @@ body{
 
 @media(max-width:600px){
 
-    body{
-
-        padding-left:10px;
-
-        padding-right:10px;
-    }
-
-
     .telegram-float{
 
         right:14px;
@@ -395,34 +332,11 @@ body{
         height:48px;
     }
 
-
     .telegram-float svg{
 
         width:26px;
 
         height:26px;
-    }
-
-
-    .bandera{
-
-        width:34px;
-
-        height:34px;
-    }
-
-
-    .hora{
-
-        width:58px;
-
-        font-size:13px;
-    }
-
-
-    .nombre-evento{
-
-        font-size:13px;
     }
 
 }
@@ -443,19 +357,15 @@ body{
 
     body{
 
-        padding-left:8px;
+        padding-left:10px;
 
-        padding-right:8px;
+        padding-right:10px;
 
         padding-bottom:70px;
     }
 
 }
 
-
-/* =========================
-   MUY PEQUEÑAS
-========================= */
 
 @media(max-width:320px){
 
@@ -597,10 +507,7 @@ function abrirTelegram(event){
     const telegramWeb =
         "https://t.me/tvlatin2021";
 
-
-    window.location.href =
-        telegramApp;
-
+    window.location.href = telegramApp;
 
     setTimeout(function(){
 
@@ -621,19 +528,11 @@ const API =
 
 
 /* =================================================
-   SERVIDOR DE IMAGENES
+   BASE DEL API
 ================================================= */
 
 const API_BASE =
     "https://api.wqxag.com";
-
-
-/* =================================================
-   IMAGEN POR DEFECTO
-================================================= */
-
-const IMAGEN_DEFAULT =
-    "https://api.wqxag.com/uploads/sin_imagen_d36205f0e8.png";
 
 
 /* =================================================
@@ -642,9 +541,7 @@ const IMAGEN_DEFAULT =
 
 function fechaHoy(){
 
-    const hoy =
-        new Date();
-
+    const hoy = new Date();
 
     const opciones = {
 
@@ -658,10 +555,7 @@ function fechaHoy(){
 
     };
 
-
-    document.getElementById(
-        "fecha"
-    ).innerText =
+    document.getElementById("fecha").innerText =
 
         hoy.toLocaleDateString(
             'es-ES',
@@ -683,10 +577,8 @@ function convertirHora(hora){
 
     }
 
-
     const partes =
         String(hora).split(":");
-
 
     if(partes.length < 2){
 
@@ -694,25 +586,14 @@ function convertirHora(hora){
 
     }
 
-
     let h =
-        parseInt(
-            partes[0],
-            10
-        );
-
+        parseInt(partes[0],10);
 
     let m =
-        parseInt(
-            partes[1],
-            10
-        );
+        parseInt(partes[1],10);
 
 
-    if(
-        isNaN(h) ||
-        isNaN(m)
-    ){
+    if(isNaN(h) || isNaN(m)){
 
         return hora;
 
@@ -720,21 +601,16 @@ function convertirHora(hora){
 
 
     const periodo =
-        h >= 12
-            ? "PM"
-            : "AM";
-
+        h >= 12 ? "PM" : "AM";
 
     let hora12 =
         h % 12;
-
 
     if(hora12 === 0){
 
         hora12 = 12;
 
     }
-
 
     return (
 
@@ -754,6 +630,94 @@ function convertirHora(hora){
 
 
 /* =================================================
+   ESCAPAR HTML
+================================================= */
+
+function escaparHTML(valor){
+
+    return String(valor ?? "")
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =================================================
+   CONSTRUIR URL DE IMAGEN
+================================================= */
+
+function construirImagen(url){
+
+    if(!url){
+
+        return API_BASE +
+            "/uploads/sin_imagen_d36205f0e8.png";
+
+    }
+
+
+    url =
+        String(url).trim();
+
+
+    /*
+    URL COMPLETA
+    */
+
+    if(
+        url.startsWith("http://") ||
+        url.startsWith("https://")
+    ){
+
+        return url;
+
+    }
+
+
+    /*
+    PROTOCOLO //
+    */
+
+    if(
+        url.startsWith("//")
+    ){
+
+        return "https:" + url;
+
+    }
+
+
+    /*
+    RUTA /uploads/...
+    */
+
+    if(
+        url.startsWith("/")
+    ){
+
+        return API_BASE + url;
+
+    }
+
+
+    /*
+    OTRA RUTA RELATIVA
+    */
+
+    return API_BASE + "/" + url;
+
+}
+
+
+/* =================================================
    ABRIR / CERRAR CANALES
 ================================================= */
 
@@ -764,7 +728,6 @@ function toggle(id){
             "links" + id
         );
 
-
     if(!el){
 
         return;
@@ -772,38 +735,14 @@ function toggle(id){
     }
 
 
-    const visible =
-        el.style.display === "block";
+    if(el.style.display === "block"){
 
+        el.style.display = "none";
 
-    el.style.display =
-        visible
-            ? "none"
-            : "block";
+    }
+    else{
 
-
-    const evento =
-        document.querySelector(
-            '[data-evento="' + id + '"]'
-        );
-
-
-    if(evento){
-
-        const flecha =
-            evento.querySelector(
-                ".flecha"
-            );
-
-
-        if(flecha){
-
-            flecha.style.transform =
-                visible
-                    ? "rotate(0deg)"
-                    : "rotate(180deg)";
-
-        }
+        el.style.display = "block";
 
     }
 
@@ -827,7 +766,9 @@ function limpiarURL(url){
         String(url).trim();
 
 
-    /* IFRAME */
+    /*
+    SI VIENE UN IFRAME
+    */
 
     if(
         url.toLowerCase()
@@ -839,11 +780,9 @@ function limpiarURL(url){
                 /src=["']([^"']+)["']/i
             );
 
-
         if(match){
 
-            url =
-                match[1];
+            url = match[1];
 
         }
 
@@ -854,45 +793,112 @@ function limpiarURL(url){
         url.trim();
 
 
-    /* QUITAR RUTA EMBED */
+    /*
+    SI ES UNA RUTA RELATIVA,
+    CONVERTIRLA USANDO EL API
+    */
 
-    url =
-        url.replace(
-            "/embed/eventos.html",
-            ""
-        );
+    let urlCompleta = url;
+
+
+    try{
+
+        urlCompleta =
+            new URL(
+                url,
+                API_BASE
+            ).href;
+
+    }
+
+    catch(error){
+
+        urlCompleta = url;
+
+    }
 
 
     /*
-       DECODIFICAR ?r=
+    BASE64 EN ?r=
     */
 
-    if(
-        url.includes("?r=")
-    ){
+    try{
 
-        const parts =
-            url.split("?r=");
+        const objetoURL =
+            new URL(
+                urlCompleta
+            );
 
 
-        if(parts[1]){
+        const parametro =
+            objetoURL.searchParams.get("r");
 
-            try{
+
+        if(parametro){
+
+            const decodificado =
+                atob(
+                    decodeURIComponent(
+                        parametro
+                    )
+                );
+
+
+            if(decodificado){
 
                 url =
-                    atob(
-                        decodeURIComponent(
-                            parts[1]
-                        )
-                    );
+                    decodificado.trim();
 
             }
-            catch(e){
 
-                console.log(
-                    "Error Base64:",
-                    e
-                );
+        }
+        else{
+
+            /*
+            SI NO TIENE r,
+            USAR LA URL NORMAL
+            */
+
+            url =
+                urlCompleta;
+
+        }
+
+    }
+
+    catch(error){
+
+        /*
+        COMPATIBILIDAD CON EL
+        FORMATO ANTERIOR
+        */
+
+        if(url.includes("?r=")){
+
+            const parts =
+                url.split("?r=");
+
+
+            if(parts[1]){
+
+                try{
+
+                    url =
+                        atob(
+                            decodeURIComponent(
+                                parts[1]
+                            )
+                        ).trim();
+
+                }
+
+                catch(e){
+
+                    console.log(
+                        "No se pudo decodificar Base64"
+                    );
+
+                }
 
             }
 
@@ -901,7 +907,9 @@ function limpiarURL(url){
     }
 
 
-    /* PROTOCOLO */
+    /*
+    PROTOCOLO //
+    */
 
     if(
         url.startsWith("//")
@@ -913,19 +921,23 @@ function limpiarURL(url){
     }
 
 
-    /* RUTA RELATIVA */
+    /*
+    RUTA RELATIVA
+    */
 
     if(
         url.startsWith("/")
     ){
 
         url =
-            "https://la14hd.com" + url;
+            API_BASE + url;
 
     }
 
 
-    /* HTTPS */
+    /*
+    AGREGAR HTTPS
+    */
 
     if(
         !url.startsWith("http://") &&
@@ -956,6 +968,15 @@ function obtenerEmbeds(attributes){
     }
 
 
+    /*
+    FORMATO STRAPI
+
+    embeds:
+    {
+        data: [...]
+    }
+    */
+
     if(
         attributes.embeds &&
         Array.isArray(
@@ -967,6 +988,11 @@ function obtenerEmbeds(attributes){
 
     }
 
+
+    /*
+    POR SI EL API ENTREGA
+    DIRECTAMENTE UN ARRAY
+    */
 
     if(
         Array.isArray(
@@ -985,143 +1011,36 @@ function obtenerEmbeds(attributes){
 
 
 /* =================================================
-   OBTENER ICONO DEL EVENTO
+   CODIFICAR BASE64
 ================================================= */
 
-function obtenerIcono(attributes){
-
-    let url = "";
-
+function codificarBase64(texto){
 
     try{
 
-        url =
-            attributes
-            ?.country
-            ?.data
-            ?.attributes
-            ?.image
-            ?.data
-            ?.attributes
-            ?.url || "";
-
-    }
-    catch(e){
-
-        url = "";
+        return btoa(texto);
 
     }
 
+    catch(error){
 
-    if(!url){
+        try{
 
-        return IMAGEN_DEFAULT;
+            return btoa(
+                unescape(
+                    encodeURIComponent(texto)
+                )
+            );
 
-    }
+        }
 
+        catch(e){
 
-    /*
-       SI YA ES URL COMPLETA
-    */
+            return "";
 
-    if(
-        url.startsWith(
-            "http://"
-        ) ||
-        url.startsWith(
-            "https://"
-        )
-    ){
-
-        return url;
+        }
 
     }
-
-
-    /*
-       SI ES RUTA /uploads/...
-    */
-
-    if(
-        url.startsWith("/")
-    ){
-
-        return API_BASE + url;
-
-    }
-
-
-    /*
-       CUALQUIER OTRA RUTA
-    */
-
-    return API_BASE + "/" + url;
-
-}
-
-
-/* =================================================
-   LIMPIAR NOMBRE
-================================================= */
-
-function limpiarDescripcion(texto){
-
-    if(!texto){
-
-        return "Evento deportivo";
-
-    }
-
-
-    return String(texto)
-
-        .replace(
-            /\r?\n/g,
-            " "
-        )
-
-        .replace(
-            /\s+/g,
-            " "
-        )
-
-        .trim();
-
-}
-
-
-/* =================================================
-   ESCAPAR HTML
-================================================= */
-
-function escaparHTML(texto){
-
-    return String(texto)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
 
 }
 
@@ -1151,15 +1070,26 @@ async function cargarAgenda(){
 
     try{
 
+        console.log(
+            "Consultando API:",
+            API
+        );
+
+
         const respuesta =
             await fetch(
                 API,
                 {
                     method:"GET",
-
                     cache:"no-store"
                 }
             );
+
+
+        console.log(
+            "HTTP:",
+            respuesta.status
+        );
 
 
         if(!respuesta.ok){
@@ -1176,34 +1106,38 @@ async function cargarAgenda(){
             await respuesta.json();
 
 
+        console.log(
+            "API recibida:",
+            data
+        );
+
+
+        /*
+        VALIDAR DATA
+        */
+
         if(
             !data ||
-            !Array.isArray(
-                data.data
-            )
+            !Array.isArray(data.data)
         ){
 
             throw new Error(
-                "Formato de API incorrecto"
+                "El API no contiene el formato data[] esperado."
             );
 
         }
 
+
+        /*
+        EVENTOS
+        */
 
         let eventos =
             data.data;
 
 
         /*
-        ==========================================
-        FILTRO FUTBOL
-        ==========================================
-
-        Si el API tiene deportes,
-        se filtra fútbol.
-
-        Si no tiene deportes,
-        se permite el evento.
+        FILTRAR FÚTBOL
         */
 
         eventos =
@@ -1211,9 +1145,16 @@ async function cargarAgenda(){
                 function(evento){
 
                     const a =
-                        evento.attributes ||
-                        {};
+                        evento.attributes || {};
 
+
+                    /*
+                    Si existe deportes,
+                    filtrar fútbol.
+
+                    Si no existe,
+                    permitir el evento.
+                    */
 
                     if(!a.deportes){
 
@@ -1226,50 +1167,42 @@ async function cargarAgenda(){
                         a.deportes
                     )
                     .toLowerCase()
-                    .includes(
-                        "futbol"
-                    );
+                    .includes("futbol");
 
                 }
             );
 
 
         /*
-        ==========================================
-        ORDENAR
-        ==========================================
+        ORDENAR POR HORA
         */
 
         eventos.sort(
             function(a,b){
 
                 const horaA =
-                    a.attributes
-                    ?.diary_hour ||
+                    a.attributes?.diary_hour ||
                     "00:00";
-
 
                 const horaB =
-                    b.attributes
-                    ?.diary_hour ||
+                    b.attributes?.diary_hour ||
                     "00:00";
 
 
-                return String(
-                    horaA
-                ).localeCompare(
-                    String(
-                        horaB
-                    )
-                );
+                return String(horaA)
+                    .localeCompare(
+                        String(horaB)
+                    );
 
             }
         );
 
 
-        if(
-            eventos.length === 0
-        ){
+        /*
+        SI NO HAY EVENTOS
+        */
+
+        if(eventos.length === 0){
 
             agenda.innerHTML = `
 
@@ -1299,8 +1232,7 @@ async function cargarAgenda(){
             function(evento,i){
 
                 const a =
-                    evento.attributes ||
-                    {};
+                    evento.attributes || {};
 
 
                 /*
@@ -1309,8 +1241,7 @@ async function cargarAgenda(){
 
                 const hora =
                     convertirHora(
-                        a.diary_hour ||
-                        ""
+                        a.diary_hour || ""
                     );
 
 
@@ -1319,25 +1250,51 @@ async function cargarAgenda(){
                 */
 
                 const desc =
-                    limpiarDescripcion(
-                        a.diary_description
+                    escaparHTML(
+                        a.diary_description ||
+                        "Evento deportivo"
                     );
 
 
                 /*
-                ICONO
+                BANDERA
                 */
 
-                const icono =
-                    obtenerIcono(a);
+                let bandera =
+                    construirImagen("");
 
 
-                /*
-                EMBEDS
-                */
+                try{
 
-                const embeds =
-                    obtenerEmbeds(a);
+                    const imagen =
+                        a.country
+                        ?.data
+                        ?.attributes
+                        ?.image
+                        ?.data
+                        ?.attributes
+                        ?.url;
+
+
+                    if(imagen){
+
+                        bandera =
+                            construirImagen(
+                                imagen
+                            );
+
+                        }
+
+                }
+
+                catch(error){
+
+                    console.log(
+                        "Error obteniendo bandera:",
+                        error
+                    );
+
+                }
 
 
                 /*
@@ -1347,69 +1304,40 @@ async function cargarAgenda(){
                 html += `
 
                 <div
-
                     class="partido"
-
-                    data-evento="${i}"
-
                     onclick="toggle(${i})"
-
                 >
 
                     <div class="info">
 
-
                         <div class="hora">
 
-                            ${escaparHTML(
-                                hora
-                            )}
+                            ${hora}
 
                         </div>
 
 
                         <img
-
                             class="bandera"
-
-                            src="${escaparHTML(
-                                icono
-                            )}"
-
-                            alt="Icono"
-
-                            loading="lazy"
-
-                            onerror="this.onerror=null;this.src='${IMAGEN_DEFAULT}'"
-
+                            src="${escaparHTML(bandera)}"
+                            onerror="
+                                this.src='${API_BASE}/uploads/sin_imagen_d36205f0e8.png'
+                            "
                         >
 
 
-                        <div class="nombre-evento">
+                        <div>
 
-                            ${escaparHTML(
-                                desc
-                            )}
+                            ${desc}
 
                         </div>
-
-
-                        <div class="flecha">
-
-                            ▼
-
-                        </div>
-
 
                     </div>
 
 
                     <div
-
                         class="links"
-
                         id="links${i}"
-
                     >
 
                 `;
@@ -1417,9 +1345,13 @@ async function cargarAgenda(){
 
                 /*
                 ==================================
-                SIN ENLACES
+                EMBEDS
                 ==================================
                 */
+
+                const embeds =
+                    obtenerEmbeds(a);
+
 
                 if(
                     embeds.length === 0
@@ -1428,13 +1360,10 @@ async function cargarAgenda(){
                     html += `
 
                         <div
-
                             style="
                                 color:#94a3b8;
                                 padding:8px 0;
-                                text-align:center;
                             "
-
                         >
 
                             No hay enlaces disponibles
@@ -1444,15 +1373,7 @@ async function cargarAgenda(){
                     `;
 
                 }
-
                 else{
-
-
-                    /*
-                    ==================================
-                    CREAR CANALES
-                    ==================================
-                    */
 
                     embeds.forEach(
                         function(embed){
@@ -1464,8 +1385,10 @@ async function cargarAgenda(){
 
 
                             const nombre =
-                                ea.embed_name ||
-                                "Ver canal";
+                                escaparHTML(
+                                    ea.embed_name ||
+                                    "Ver canal"
+                                );
 
 
                             const iframe =
@@ -1496,7 +1419,24 @@ async function cargarAgenda(){
 
 
                             /*
-                            PLAYER
+                            CODIFICAR URL
+                            */
+
+                            const base64 =
+                                codificarBase64(
+                                    urlOriginal
+                                );
+
+
+                            if(!base64){
+
+                                return;
+
+                            }
+
+
+                            /*
+                            CREAR PLAYER
                             */
 
                             const urlPlayer =
@@ -1504,33 +1444,22 @@ async function cargarAgenda(){
                                 "https://verfutbollibre.github.io/eventos.html?r=" +
 
                                 encodeURIComponent(
-
-                                    btoa(
-                                        urlOriginal
-                                    )
-
+                                    base64
                                 );
 
 
                             html += `
 
-                                <a
+                            <a
+                                href="${escaparHTML(urlPlayer)}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onclick="event.stopPropagation();"
+                            >
 
-                                    href="${urlPlayer}"
+                                ▶ ${nombre}
 
-                                    target="_blank"
-
-                                    rel="noopener noreferrer"
-
-                                    onclick="event.stopPropagation();"
-
-                                >
-
-                                    ▶ ${escaparHTML(
-                                        nombre
-                                    )}
-
-                                </a>
+                            </a>
 
                             `;
 
@@ -1553,13 +1482,17 @@ async function cargarAgenda(){
 
 
         /*
-        ==========================================
-        MOSTRAR AGENDA
-        ==========================================
+        MOSTRAR
         */
 
         agenda.innerHTML =
             html;
+
+
+        console.log(
+            "Eventos mostrados:",
+            eventos.length
+        );
 
 
     }
@@ -1567,7 +1500,7 @@ async function cargarAgenda(){
     catch(error){
 
         console.error(
-            "ERROR API:",
+            "ERROR CARGANDO API:",
             error
         );
 
@@ -1575,13 +1508,10 @@ async function cargarAgenda(){
         agenda.innerHTML = `
 
             <div
-
                 class="mensaje"
-
                 style="
                     color:#f87171;
                 "
-
             >
 
                 ❌ No se pudo cargar la agenda.
@@ -1589,11 +1519,9 @@ async function cargarAgenda(){
                 <br><br>
 
                 <small
-
                     style="
                         color:#94a3b8;
                     "
-
                 >
 
                     ${escaparHTML(
@@ -1625,18 +1553,15 @@ cargarAgenda();
 ================================================= */
 
 setInterval(
-
     cargarAgenda,
-
     60000
-
 );
 
 </script>
 
 
 <!-- =================================================
-     TELEGRAM SEGURIDAD
+     SEGURIDAD TELEGRAM
 ================================================= -->
 
 <script>
