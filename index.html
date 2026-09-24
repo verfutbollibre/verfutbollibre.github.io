@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -31,7 +32,7 @@ body{
 }
 
 body{
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#0f172a;
     color:#e5e7eb;
 
@@ -50,6 +51,7 @@ body{
 .titulo{
     text-align:center;
     font-size:22px;
+    font-weight:bold;
     margin-top:20px;
     margin-bottom:10px;
 }
@@ -74,9 +76,14 @@ body{
     width:100%;
     max-width:750px;
     margin:0 auto;
+
     background:#1e293b;
+
     border-radius:10px;
+
     overflow:hidden;
+
+    min-height:50px;
 }
 
 
@@ -86,8 +93,11 @@ body{
 
 .partido{
     padding:14px;
+
     border-bottom:1px solid #334155;
+
     cursor:pointer;
+
     box-sizing:border-box;
 }
 
@@ -102,7 +112,9 @@ body{
 
 .info{
     display:flex;
+
     align-items:center;
+
     gap:10px;
 }
 
@@ -113,8 +125,11 @@ body{
 
 .hora{
     width:60px;
+
     flex-shrink:0;
+
     font-weight:bold;
+
     color:#38bdf8;
 }
 
@@ -126,8 +141,11 @@ body{
 .bandera{
     width:22px;
     height:22px;
+
     flex-shrink:0;
+
     border-radius:50%;
+
     object-fit:cover;
 }
 
@@ -138,24 +156,50 @@ body{
 
 .links{
     display:none;
+
     padding:10px 20px;
+
     background:#020617;
 }
 
 
 /* =========================
-   BOTONES DE CANALES
+   BOTONES CANALES
 ========================= */
 
 .links a{
     display:block;
+
     background:#2563eb;
+
     padding:8px;
+
     margin:6px 0;
+
     border-radius:6px;
+
     color:white;
+
     text-decoration:none;
+
     font-size:14px;
+}
+
+.links a:hover{
+    background:#1d4ed8;
+}
+
+
+/* =========================
+   MENSAJES
+========================= */
+
+.mensaje{
+    padding:20px;
+
+    text-align:center;
+
+    color:#94a3b8;
 }
 
 
@@ -165,30 +209,37 @@ body{
 
 #container-78e796a34647115581861ea99c7b18cd{
     width:100%;
+
     text-align:center;
+
     margin:15px auto;
 }
 
 
 /* =================================================
-   BANNER NUEVO FIJO INFERIOR
+   BANNER FIJO INFERIOR
 ================================================= */
 
 .banner-fijo{
+
     position:fixed;
 
     bottom:0;
+
     left:50%;
 
     transform:translateX(-50%);
 
     width:360px;
+
     height:60px;
 
     z-index:99999;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     background:#0f172a;
@@ -198,7 +249,7 @@ body{
 
 
 /* =================================================
-   TELEGRAM FLOTANTE
+   TELEGRAM
 ================================================= */
 
 .telegram-float{
@@ -206,9 +257,11 @@ body{
     position:fixed;
 
     right:18px;
+
     bottom:82px;
 
     width:52px;
+
     height:52px;
 
     border-radius:50%;
@@ -218,6 +271,7 @@ body{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     z-index:99998;
@@ -235,11 +289,10 @@ body{
 }
 
 
-/* ICONO */
-
 .telegram-float svg{
 
     width:28px;
+
     height:28px;
 
     fill:#ffffff;
@@ -247,8 +300,6 @@ body{
     pointer-events:none;
 }
 
-
-/* EFECTO */
 
 .telegram-float:hover{
 
@@ -262,7 +313,6 @@ body{
 .telegram-float:active{
 
     transform:scale(.95);
-
 }
 
 
@@ -275,15 +325,18 @@ body{
     .telegram-float{
 
         right:14px;
+
         bottom:78px;
 
         width:48px;
+
         height:48px;
     }
 
     .telegram-float svg{
 
         width:26px;
+
         height:26px;
     }
 
@@ -291,7 +344,7 @@ body{
 
 
 /* =========================
-   PANTALLAS HASTA 360px
+   PANTALLAS PEQUEÑAS
 ========================= */
 
 @media(max-width:360px){
@@ -299,28 +352,28 @@ body{
     .banner-fijo{
 
         width:100%;
+
         height:60px;
     }
 
     body{
 
         padding-left:10px;
+
         padding-right:10px;
+
         padding-bottom:70px;
     }
 
 }
 
 
-/* =========================
-   PANTALLAS MUY PEQUEÑAS
-========================= */
-
 @media(max-width:320px){
 
     .banner-fijo{
 
         width:100%;
+
         height:60px;
     }
 
@@ -340,7 +393,7 @@ body{
 
 <div class="titulo">
 
-    ⚽ Agenda
+    ⚽ Agenda Deportiva
 
 </div>
 
@@ -361,7 +414,11 @@ body{
 
 <div id="agenda">
 
-    Cargando eventos...
+    <div class="mensaje">
+
+        ⏳ Cargando eventos...
+
+    </div>
 
 </div>
 
@@ -382,7 +439,7 @@ body{
 
 
 <!-- =================================================
-     BOTÓN TELEGRAM
+     TELEGRAM
 ================================================= -->
 
 <a
@@ -445,33 +502,13 @@ function abrirTelegram(event){
 
     event.preventDefault();
 
-    /*
-       Enlace directo a la aplicación
-    */
-
     const telegramApp =
         "tg://resolve?domain=tvlatin2021";
-
-
-    /*
-       Enlace web alternativo
-    */
 
     const telegramWeb =
         "https://t.me/tvlatin2021";
 
-
-    /*
-       Intentar abrir Telegram
-    */
-
     window.location.href = telegramApp;
-
-
-    /*
-       Si no se abrió la aplicación,
-       intentar versión web.
-    */
 
     setTimeout(function(){
 
@@ -484,7 +521,7 @@ function abrirTelegram(event){
 
 
 /* =================================================
-   API DE LA AGENDA
+   API
 ================================================= */
 
 const API =
@@ -492,14 +529,14 @@ const API =
 
 
 /* =================================================
-   FECHA AUTOMÁTICA
+   FECHA
 ================================================= */
 
 function fechaHoy(){
 
-    let hoy = new Date();
+    const hoy = new Date();
 
-    let opciones = {
+    const opciones = {
 
         weekday:'long',
 
@@ -514,11 +551,8 @@ function fechaHoy(){
     document.getElementById("fecha").innerText =
 
         hoy.toLocaleDateString(
-
             'es-ES',
-
             opciones
-
         );
 
 }
@@ -530,33 +564,63 @@ function fechaHoy(){
 
 function convertirHora(hora){
 
-    if(!hora)
+    if(!hora){
 
         return "";
 
+    }
 
-    let h = hora.split(":");
+    const partes =
+        String(hora).split(":");
+
+    if(partes.length < 2){
+
+        return hora;
+
+    }
+
+    let h =
+        parseInt(partes[0],10);
+
+    let m =
+        parseInt(partes[1],10);
 
 
-    let date = new Date();
+    if(isNaN(h) || isNaN(m)){
+
+        return hora;
+
+    }
 
 
-    date.setHours(h[0]);
+    /*
+    Si el API entrega hora local,
+    se mantiene la hora.
+    */
 
-    date.setMinutes(h[1]);
+    const periodo =
+        h >= 12 ? "PM" : "AM";
 
+    let hora12 =
+        h % 12;
 
-    return date.toLocaleTimeString(
+    if(hora12 === 0){
 
-        [],
+        hora12 = 12;
 
-        {
+    }
 
-            hour:'2-digit',
+    return (
 
-            minute:'2-digit'
+        String(hora12).padStart(2,"0") +
 
-        }
+        ":" +
+
+        String(m).padStart(2,"0") +
+
+        " " +
+
+        periodo
 
     );
 
@@ -569,25 +633,28 @@ function convertirHora(hora){
 
 function toggle(id){
 
-    let el = document.getElementById(
+    const el =
+        document.getElementById(
+            "links" + id
+        );
 
-        "links" + id
-
-    );
-
-
-    if(!el)
+    if(!el){
 
         return;
 
+    }
 
-    el.style.display =
 
-        el.style.display === "block"
+    if(el.style.display === "block"){
 
-            ? "none"
+        el.style.display = "none";
 
-            : "block";
+    }
+    else{
+
+        el.style.display = "block";
+
+    }
 
 }
 
@@ -598,70 +665,82 @@ function toggle(id){
 
 function limpiarURL(url){
 
-    if(!url)
+    if(!url){
 
         return "";
-
-
-    /*
-       Si viene iframe
-    */
-
-    if(url.includes("<iframe")){
-
-        let match = url.match(
-
-            /src="([^"]+)"/
-
-        );
-
-
-        if(match)
-
-            url = match[1];
 
     }
 
 
-    url = url.trim();
+    url =
+        String(url).trim();
 
 
     /*
-       Quitar rutas embed
+    SI VIENE UN IFRAME
     */
 
-    url = url.replace(
+    if(
+        url.toLowerCase()
+        .includes("<iframe")
+    ){
 
-        "/embed/eventos.html",
+        const match =
+            url.match(
+                /src=["']([^"']+)["']/i
+            );
 
-        ""
+        if(match){
 
-    );
+            url = match[1];
+
+        }
+
+    }
+
+
+    url =
+        url.trim();
 
 
     /*
-       Evitar doble base64
+    QUITAR RUTA EMBED
+    */
+
+    url =
+        url.replace(
+            "/embed/eventos.html",
+            ""
+        );
+
+
+    /*
+    BASE64
     */
 
     if(url.includes("?r=")){
 
-        let parts = url.split("?r=");
+        const parts =
+            url.split("?r=");
 
 
         if(parts[1]){
 
             try{
 
-                url = atob(parts[1]);
+                url =
+                    atob(
+                        decodeURIComponent(
+                            parts[1]
+                        )
+                    );
 
             }
 
             catch(e){
 
                 console.log(
-
-                    "Error decodificando URL"
-
+                    "No se pudo decodificar Base64"
                 );
 
             }
@@ -672,21 +751,26 @@ function limpiarURL(url){
 
 
     /*
-       Protocolo
+    PROTOCOLO //
     */
 
-    if(url.startsWith("//")){
+    if(
+        url.startsWith("//")
+    ){
 
-        url = "https:" + url;
+        url =
+            "https:" + url;
 
     }
 
 
     /*
-       Ruta relativa
+    RUTA RELATIVA
     */
 
-    if(url.startsWith("/")){
+    if(
+        url.startsWith("/")
+    ){
 
         url =
             "https://la14hd.com" + url;
@@ -695,12 +779,16 @@ function limpiarURL(url){
 
 
     /*
-       Si no tiene http
+    AGREGAR HTTPS
     */
 
-    if(!url.startsWith("http")){
+    if(
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+    ){
 
-        url = "https://" + url;
+        url =
+            "https://" + url;
 
     }
 
@@ -711,272 +799,540 @@ function limpiarURL(url){
 
 
 /* =================================================
+   OBTENER EMBEDS
+================================================= */
+
+function obtenerEmbeds(attributes){
+
+    if(!attributes){
+
+        return [];
+
+    }
+
+
+    /*
+    FORMATO STRAPI
+
+    embeds:
+    {
+        data: [...]
+    }
+    */
+
+    if(
+        attributes.embeds &&
+        Array.isArray(
+            attributes.embeds.data
+        )
+    ){
+
+        return attributes.embeds.data;
+
+    }
+
+
+    /*
+    POR SI EL API ENTREGA
+    DIRECTAMENTE UN ARRAY
+    */
+
+    if(
+        Array.isArray(
+            attributes.embeds
+        )
+    ){
+
+        return attributes.embeds;
+
+    }
+
+
+    return [];
+
+}
+
+
+/* =================================================
    CARGAR AGENDA
 ================================================= */
 
 async function cargarAgenda(){
 
+    const agenda =
+        document.getElementById(
+            "agenda"
+        );
+
+
+    agenda.innerHTML = `
+
+        <div class="mensaje">
+
+            ⏳ Cargando eventos...
+
+        </div>
+
+    `;
+
+
     try{
 
-        let res = await fetch(API);
+        console.log(
+            "Consultando API:",
+            API
+        );
 
 
-        let data = await res.json();
+        const respuesta =
+            await fetch(
+                API,
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
+            );
+
+
+        console.log(
+            "HTTP:",
+            respuesta.status
+        );
+
+
+        if(!respuesta.ok){
+
+            throw new Error(
+                "HTTP " +
+                respuesta.status
+            );
+
+        }
+
+
+        const data =
+            await respuesta.json();
+
+
+        console.log(
+            "API recibida:",
+            data
+        );
+
+
+        /*
+        VALIDAR DATA
+        */
+
+        if(
+            !data ||
+            !Array.isArray(data.data)
+        ){
+
+            throw new Error(
+                "El API no contiene el formato data[] esperado."
+            );
+
+        }
+
+
+        /*
+        EVENTOS
+        */
+
+        let eventos =
+            data.data;
+
+
+        /*
+        FILTRAR FÚTBOL
+        */
+
+        eventos =
+            eventos.filter(
+                function(evento){
+
+                    const a =
+                        evento.attributes || {};
+
+
+                    /*
+                    Si existe deportes,
+                    filtrar fútbol.
+
+                    Si no existe,
+                    permitir el evento.
+                    */
+
+                    if(!a.deportes){
+
+                        return true;
+
+                    }
+
+
+                    return String(
+                        a.deportes
+                    )
+                    .toLowerCase()
+                    .includes("futbol");
+
+                }
+            );
+
+
+        /*
+        ORDENAR POR HORA
+        */
+
+        eventos.sort(
+            function(a,b){
+
+                const horaA =
+                    a.attributes?.diary_hour ||
+                    "00:00";
+
+                const horaB =
+                    b.attributes?.diary_hour ||
+                    "00:00";
+
+
+                return String(horaA)
+                    .localeCompare(
+                        String(horaB)
+                    );
+
+            }
+        );
+
+
+        /*
+        SI NO HAY EVENTOS
+        */
+
+        if(eventos.length === 0){
+
+            agenda.innerHTML = `
+
+                <div class="mensaje">
+
+                    ⚠️ No hay eventos disponibles.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
 
 
         let html = "";
 
 
-        data.data
+        /*
+        ==========================================
+        CREAR EVENTOS
+        ==========================================
+        */
 
-        .filter(e =>
+        eventos.forEach(
+            function(evento,i){
 
-            e.attributes.deportes &&
+                const a =
+                    evento.attributes || {};
 
-            e.attributes.deportes
 
-                .toLowerCase() == "futbol"
+                /*
+                HORA
+                */
 
-        )
+                const hora =
+                    convertirHora(
+                        a.diary_hour || ""
+                    );
 
 
-        .sort((a,b) =>
+                /*
+                DESCRIPCIÓN
+                */
 
-            a.attributes.diary_hour
+                const desc =
+                    a.diary_description ||
+                    "Evento deportivo";
 
-                .localeCompare(
 
-                    b.attributes.diary_hour
+                /*
+                BANDERA
+                */
 
-                )
+                let bandera =
+                    "https://img.agenda18.com/uploads/sin_imagen_d36205f0e8.png";
 
-        )
 
+                try{
 
-        .forEach((evento,i)=>{
+                    const imagen =
+                        a.country
+                        ?.data
+                        ?.attributes
+                        ?.image
+                        ?.data
+                        ?.attributes
+                        ?.url;
 
 
-            /*
-               HORA
-            */
+                    if(imagen){
 
-            let hora =
+                        if(
+                            imagen.startsWith(
+                                "http"
+                            )
+                        ){
 
-                convertirHora(
+                            bandera =
+                                imagen;
 
-                    evento.attributes
+                        }
+                        else{
 
-                        .diary_hour
+                            bandera =
+                                "https://img.agenda18.com" +
+                                imagen;
 
-                );
+                        }
 
+                    }
 
-            /*
-               DESCRIPCION
-            */
+                }
 
-            let desc =
+                catch(error){
 
-                evento.attributes
+                    console.log(
+                        "Error obteniendo bandera:",
+                        error
+                    );
 
-                    .diary_description || "";
+                }
 
 
-            /*
-               BANDERA
-            */
+                /*
+                EVENTO
+                */
 
-            let bandera =
-
-                "https://img.agenda18.com/uploads/sin_imagen_d36205f0e8.png";
-
-
-            if(
-
-                evento.attributes.country &&
-
-                evento.attributes.country.data &&
-
-                evento.attributes.country.data.attributes &&
-
-                evento.attributes.country.data.attributes.image &&
-
-                evento.attributes.country.data.attributes.image.data
-
-            ){
-
-                bandera =
-
-                    "https://img.agenda18.com" +
-
-                    evento.attributes.country
-
-                        .data.attributes.image
-
-                        .data.attributes.url;
-
-            }
-
-
-            /*
-               EVENTO
-            */
-
-            html += `
-
-            <div
-
-                class="partido"
-
-                onclick="toggle(${i})"
-
-            >
-
-                <div class="info">
-
-                    <div class="hora">
-
-                        ${hora}
-
-                    </div>
-
-
-                    <img
-
-                        class="bandera"
-
-                        src="${bandera}"
-
-                    >
-
-
-                    <div>
-
-                        ${desc}
-
-                    </div>
-
-                </div>
-
+                html += `
 
                 <div
-
-                    class="links"
-
-                    id="links${i}"
-
+                    class="partido"
+                    onclick="toggle(${i})"
                 >
 
-            `;
+                    <div class="info">
+
+                        <div class="hora">
+
+                            ${hora}
+
+                        </div>
 
 
-            /*
-               ENLACES
-            */
-
-            if(
-
-                evento.attributes.embeds &&
-
-                evento.attributes.embeds.data
-
-            ){
-
-                evento.attributes.embeds.data
-
-                    .forEach(embed=>{
+                        <img
+                            class="bandera"
+                            src="${bandera}"
+                            onerror="
+                                this.src='https://img.agenda18.com/uploads/sin_imagen_d36205f0e8.png'
+                            "
+                        >
 
 
-                        if(embed){
+                        <div>
+
+                            ${desc}
+
+                        </div>
+
+                    </div>
 
 
-                            let urlOriginal =
+                    <div
+                        class="links"
+                        id="links${i}"
+                    >
 
+                `;
+
+
+                /*
+                ==================================
+                EMBEDS
+                ==================================
+                */
+
+                const embeds =
+                    obtenerEmbeds(a);
+
+
+                if(
+                    embeds.length === 0
+                ){
+
+                    html += `
+
+                        <div
+                            style="
+                                color:#94a3b8;
+                                padding:8px 0;
+                            "
+                        >
+
+                            No hay enlaces disponibles
+
+                        </div>
+
+                    `;
+
+                }
+                else{
+
+                    embeds.forEach(
+                        function(embed){
+
+                            const ea =
+                                embed?.attributes ||
+                                embed ||
+                                {};
+
+
+                            const nombre =
+                                ea.embed_name ||
+                                "Ver canal";
+
+
+                            const iframe =
+                                ea.embed_iframe ||
+                                ea.embed_url ||
+                                ea.url ||
+                                "";
+
+
+                            if(!iframe){
+
+                                return;
+
+                            }
+
+
+                            const urlOriginal =
                                 limpiarURL(
-
-                                    embed.attributes
-
-                                        .embed_iframe
-
+                                    iframe
                                 );
 
 
+                            if(!urlOriginal){
+
+                                return;
+
+                            }
+
+
                             /*
-                               URL DEL PLAYER
+                            CREAR PLAYER
                             */
 
-                            let urlPlayer =
+                            const urlPlayer =
 
                                 "https://verfutbollibre.github.io/eventos.html?r=" +
 
                                 encodeURIComponent(
-
-                                    btoa(urlOriginal)
-
+                                    btoa(
+                                        urlOriginal
+                                    )
                                 );
 
 
                             html += `
 
                             <a
-
                                 href="${urlPlayer}"
-
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 onclick="event.stopPropagation();"
-
                             >
 
-                                ▶
-
-                                ${embed.attributes.embed_name}
+                                ▶ ${nombre}
 
                             </a>
 
                             `;
 
                         }
+                    );
 
-                    });
-
-            }
+                }
 
 
-            html += `
+                html += `
+
+                    </div>
 
                 </div>
 
-            </div>
+                `;
 
-            `;
-
-        });
+            }
+        );
 
 
         /*
-           MOSTRAR AGENDA
+        MOSTRAR
         */
 
-        document.getElementById(
+        agenda.innerHTML =
+            html;
 
-            "agenda"
 
-        ).innerHTML = html;
+        console.log(
+            "Eventos mostrados:",
+            eventos.length
+        );
 
 
     }
 
-    catch(e){
+    catch(error){
 
-        console.error(e);
+        console.error(
+            "ERROR CARGANDO API:",
+            error
+        );
 
 
-        document.getElementById(
+        agenda.innerHTML = `
 
-            "agenda"
+            <div
+                class="mensaje"
+                style="
+                    color:#f87171;
+                "
+            >
 
-        ).innerHTML =
+                ❌ No se pudo cargar la agenda.
 
-            "Error cargando eventos";
+                <br><br>
+
+                <small
+                    style="
+                        color:#94a3b8;
+                    "
+                >
+
+                    ${error.message}
+
+                </small>
+
+            </div>
+
+        `;
 
     }
 
@@ -993,128 +1349,43 @@ cargarAgenda();
 
 
 /* =================================================
-   ACTUALIZAR AGENDA
+   ACTUALIZAR CADA 60 SEGUNDOS
 ================================================= */
 
 setInterval(
-
     cargarAgenda,
-
     60000
-
 );
 
 </script>
 
 
 <!-- =================================================
-     AJUSTE DE HORARIO
+     SEGURIDAD TELEGRAM
 ================================================= -->
 
 <script>
 
 document.addEventListener(
-
     "DOMContentLoaded",
-
-    function(){
-
-        const zonaOrigen = 1;
-
-        const zonaDestino = -5;
-
-        const diferencia =
-
-            zonaDestino - zonaOrigen;
-
-
-        document
-
-            .querySelectorAll(".t")
-
-            .forEach(function(el){
-
-
-                const texto =
-
-                    el.textContent.trim();
-
-
-                if(!texto.includes(":"))
-
-                    return;
-
-
-                let [h,m] =
-
-                    texto
-
-                        .split(":")
-
-                        .map(Number);
-
-
-                h = h + diferencia;
-
-
-                if(h < 0)
-
-                    h += 24;
-
-
-                if(h >= 24)
-
-                    h -= 24;
-
-
-                el.textContent =
-
-                    String(h).padStart(2,"0") +
-
-                    ":" +
-
-                    String(m).padStart(2,"0");
-
-            });
-
-    }
-
-);
-
-
-/* =================================================
-   SEGURIDAD EXTRA TELEGRAM
-================================================= */
-
-document.addEventListener(
-
-    "DOMContentLoaded",
-
     function(){
 
         const telegram =
-
             document.querySelector(
-
                 ".telegram-float"
-
             );
 
 
         if(telegram){
 
             telegram.setAttribute(
-
                 "href",
-
                 "tg://resolve?domain=tvlatin2021"
-
             );
 
         }
 
     }
-
 );
 
 </script>
@@ -1130,3 +1401,4 @@ document.addEventListener(
 </body>
 
 </html>
+```
